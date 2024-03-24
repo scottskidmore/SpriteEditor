@@ -79,7 +79,7 @@
      <string>Erase</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="Canvas" name="label">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -113,6 +113,13 @@ border: 5px;</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QLabel</extends>
+   <header>canvas.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
