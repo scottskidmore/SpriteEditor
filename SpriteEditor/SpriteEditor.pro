@@ -14,14 +14,16 @@ SOURCES += \
     draw.cpp \
     frame.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    model.cpp
 
 HEADERS += \
     animation.h \
     canvas.h \
     draw.h \
     frame.h \
-    mainwindow.h
+    mainwindow.h \
+    model.h
 
 FORMS += \
     mainwindow.ui

@@ -14,7 +14,9 @@ public:
     void setGridSize(int size);
     void drawGrid();
 
-protected:
+    std::list<QImage> layers;
+
+//protected:
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
@@ -28,6 +30,8 @@ private:
 
 signals:
     void gridClicked(QPoint);
+public slots:
+    void updateCanvas(std::list<QImage>);
 };
 
 #endif // CANVAS_H

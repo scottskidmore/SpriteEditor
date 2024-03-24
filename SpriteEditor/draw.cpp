@@ -41,3 +41,18 @@ void Draw::drawSpray(QPoint, int)
 {
 
 }
+
+void Draw::drawPixel(QPoint point)
+{
+    image.setPixel(point, 2552552550);
+}
+
+void Draw::setImage(QImage& image)
+{
+
+}
+
+void Draw::drawImage(QPoint point)
+{
+
+}

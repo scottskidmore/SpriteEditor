@@ -6,3 +6,8 @@ void Frame::drawPixel(QPoint)
 {
 
 }
+
+void Frame::sendImages()
+{
+    emit updateImage(images);
+}

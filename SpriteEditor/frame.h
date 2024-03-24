@@ -16,7 +16,9 @@ private:
     int currentImage;
 
 signals:
-    void updateImage(QImage);
+    void updateImage(std::list<QImage>);
+public slots:
+    void sendImages();
 };
 
 #endif // FRAME_H

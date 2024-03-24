@@ -60,3 +60,8 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
     trackMouse = false;
 }
 
+void Canvas::updateCanvas(std::list<QImage> newLayers)
+{
+    layers.swap(newLayers);
+}
+
