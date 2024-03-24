@@ -3,9 +3,11 @@
 
 #include <list>
 #include <QImage>
+#include "qobject.h"
 
-class Frame
+class Frame : public QObject
 {
+    Q_OBJECT
 public:
     Frame();
     void drawPixel(QPoint);
