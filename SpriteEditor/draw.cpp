@@ -46,7 +46,8 @@ void Draw::drawSpray(QPoint, int)
 
 void Draw::drawPixel(QPoint point)
 {
-    image.setPixel(point, 2552552550);
+    //QRgb black = qRgb(0, 0, 0);
+    image.setPixelColor(point, Qt::black);
 }
 
 void Draw::setImage(QImage& image)

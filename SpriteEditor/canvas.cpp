@@ -1,5 +1,6 @@
 #include "canvas.h"
 #include <QDebug>
+#include <QImageWriter>
 
 Canvas::Canvas(QWidget *parent)
     : QLabel{parent}
@@ -32,6 +33,15 @@ void Canvas::paintEvent(QPaintEvent *event) {
         painter.drawLine(xy, 0, xy, 512); //vertical line
         painter.drawLine(0, xy, 512, xy);
     }
+    qDebug() << "not printing layer, layersSize: " << layers.size();
+    // change later for layers
+    if (!layers.empty()) {
+        qDebug() << "printing layer, layersSize: " << layers.size();
+        QPixmap map = QPixmap::fromImage(layers[0]);
+        map = map.scaled(512, 512);
+        map.toImage().save(QString("image2.png"));
+        painter.drawPixmap(0, 0, 512, 512, map);
+    }
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
@@ -45,6 +55,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
         }
 
     }
+    QWidget::update();
 
 }
 
@@ -58,10 +69,11 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
     qDebug() << "Mouse released: " << event->pos();
     trackMouse = false;
+
 }
 
 void Canvas::updateCanvas(std::vector<QImage> newLayers)
 {
-    layers.swap(newLayers);
+    std::swap(layers, newLayers);
 }
 

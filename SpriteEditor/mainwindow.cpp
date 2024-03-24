@@ -13,7 +13,7 @@ MainWindow::MainWindow(model *m, QWidget *parent)
             m,
             &model::drawImage);
 
-    QObject::connect(m->f,
+    QObject::connect(&m->f,
             &Frame::updateImage,
             ui->canvas,
             &Canvas::updateCanvas);

@@ -13,7 +13,8 @@ void model::setDrawLayer()
 
 void model::drawImage(QPoint p)
 {
-    pen.drawPixel(p);
+    //pen.drawPixel(p);
+    f.drawPixel(p);
     f.sendImages();
 }
 

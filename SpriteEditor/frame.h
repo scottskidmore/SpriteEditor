@@ -19,7 +19,7 @@ private:
     int currentImage;
 
 signals:
-    void updateImage(std::vector<QImage> images);
+    void updateImage(std::vector<QImage>);
 
 public slots:
     void sendImages();

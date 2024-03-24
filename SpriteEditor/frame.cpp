@@ -3,13 +3,14 @@
 Frame::Frame(QObject *parent)
 {
     QImage newImage(32, 32, QImage::Format_ARGB32);
+    newImage.setPixelColor(16, 16, Qt::blue);
     images.push_back(newImage);
     currentImage = 0;
 }
 
-void Frame::drawPixel(QPoint)
+void Frame::drawPixel(QPoint point)
 {
-
+    images[0].setPixelColor(point, Qt::black);
 }
 
 QImage& Frame::getCurrentLayer()
