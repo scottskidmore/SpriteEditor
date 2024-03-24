@@ -1,6 +1,8 @@
 #include "draw.h"
 
-Draw::Draw() {}
+Draw::Draw(QObject *parent)
+    : QObject{parent}
+{}
 
 int Draw::getLineWdith()
 {
@@ -49,7 +51,7 @@ void Draw::drawPixel(QPoint point)
 
 void Draw::setImage(QImage& image)
 {
-
+    this->image = image;
 }
 
 void Draw::drawImage(QPoint point)

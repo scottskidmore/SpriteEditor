@@ -1,24 +1,26 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include <list>
 #include <QImage>
 #include "qobject.h"
+#include <vector>
 
 class Frame : public QObject
 {
     Q_OBJECT
 public:
-    Frame();
+    explicit Frame(QObject *parent = nullptr);
     void drawPixel(QPoint);
+    QImage& getCurrentLayer();
 
 private:
-    std::list<QImage> images;
+    std::vector<QImage> images;
     int frameID;
     int currentImage;
 
 signals:
-    void updateImage(std::list<QImage>);
+    void updateImage(std::vector<QImage> images);
+
 public slots:
     void sendImages();
 };

@@ -2,11 +2,13 @@
 #define DRAW_H
 
 #include <QPainter>
+#include "qobject.h"
 
-class Draw
+class Draw : public QObject
 {
+    Q_OBJECT
 public:
-    Draw();
+    explicit Draw(QObject *parent = nullptr);
     int getLineWdith();
     void setLineWdith(int);
     QColor getColor();

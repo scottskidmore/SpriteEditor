@@ -5,6 +5,7 @@
 #include <QPoint>
 #include <QPainter>
 #include <QMouseEvent>
+#include <vector>
 
 class Canvas : public QLabel
 {
@@ -14,7 +15,7 @@ public:
     void setGridSize(int size);
     void drawGrid();
 
-    std::list<QImage> layers;
+    std::vector<QImage> layers;
 
 //protected:
     void paintEvent(QPaintEvent *event);
@@ -31,7 +32,7 @@ private:
 signals:
     void gridClicked(QPoint);
 public slots:
-    void updateCanvas(std::list<QImage>);
+    void updateCanvas(std::vector<QImage>);
 };
 
 #endif // CANVAS_H

@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "canvas.h"
 
-MainWindow::MainWindow(model &m, QWidget *parent)
+MainWindow::MainWindow(model *m, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -10,13 +10,15 @@ MainWindow::MainWindow(model &m, QWidget *parent)
     ui->canvas->setGridSize(32);
     QObject::connect(ui->canvas,
             &Canvas::gridClicked,
-            &m,
+            m,
             &model::drawImage);
 
-    QObject::connect(&m.f,
+    QObject::connect(m->f,
             &Frame::updateImage,
-                     ui->canvas,
+            ui->canvas,
             &Canvas::updateCanvas);
+
+    m->setDrawLayer();
 }
 
 MainWindow::~MainWindow()

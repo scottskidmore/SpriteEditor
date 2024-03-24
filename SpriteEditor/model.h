@@ -14,6 +14,7 @@ public:
     Draw pen;
     Animation a;
     Frame f;
+    void setDrawLayer();
 
 
 private:
