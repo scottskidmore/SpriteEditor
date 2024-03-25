@@ -62,6 +62,10 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
     qDebug() << "Mouse pressed: " << event->pos();
+    int x = event->pos().x() / cellSize;
+    int y = event->pos().y() / cellSize;
+    emit gridClicked(QPoint(x, y));
+    QWidget::update();
     trackMouse = true;
 }
 

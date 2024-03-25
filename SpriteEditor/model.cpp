@@ -62,7 +62,7 @@ void model::savePressed()
     }
 
     QFile file2(QString("testJson.json"));
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    file2.open(QIODevice::ReadOnly | QIODevice::Text);
     QByteArray imagejsonData = file2.readAll();
     file2.close();
     QJsonDocument doc2 = QJsonDocument::fromJson(imagejsonData);
