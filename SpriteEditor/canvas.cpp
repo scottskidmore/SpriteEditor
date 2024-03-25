@@ -53,8 +53,8 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
             emit gridClicked(QPoint(x, y));
             qDebug() << "Tracking Mouse move: " << x << " " << y;
         }
-
     }
+
     QWidget::update();
 
 }

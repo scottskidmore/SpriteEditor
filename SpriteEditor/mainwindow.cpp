@@ -41,6 +41,7 @@ MainWindow::MainWindow(model *m, QWidget *parent)
 
 
     m->setDrawLayer();
+    this->m = m;
 }
 
 
@@ -48,6 +49,7 @@ void MainWindow::chooseColor() {
     QColor color = QColorDialog::getColor(Qt::white, this, "Choose Color");
     if (color.isValid()) {
         ui->colorLabel->setStyleSheet("background-color: " + color.name() + ";");
+        m->pen.setColor(color);
     }
 }
 

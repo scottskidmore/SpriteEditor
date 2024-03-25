@@ -3,7 +3,7 @@
 Draw::Draw(QObject *parent)
     : QObject{parent}
 {
-
+    color = Qt::black;
 }
 
 int Draw::getLineWdith()
@@ -21,8 +21,9 @@ QColor Draw::getColor()
 
 }
 
-void Draw::setColor(QColor)
+void Draw::setColor(QColor c)
 {
+    color = c;
 }
 
 void Draw::drawSquare(QPoint, int)
@@ -47,7 +48,7 @@ void Draw::drawSpray(QPoint, int)
 
 void Draw::drawPixel(QPoint point)
 {
-    image->setPixelColor(point, Qt::black);
+    image->setPixelColor(point, color);
 }
 
 void Draw::setImage(QImage& image)

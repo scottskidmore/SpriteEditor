@@ -22,6 +22,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    model* m;
     void chooseColor();
 
 public slots:
