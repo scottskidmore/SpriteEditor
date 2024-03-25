@@ -4,6 +4,11 @@
 #include "draw.h"
 #include "animation.h"
 #include "qobject.h"
+#include <QByteArray>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QBuffer>
 
 class model : public QObject
 {
@@ -18,9 +23,13 @@ public:
 
 
 private:
+    char currentTool;
 
 public slots:
-    void drawImage(QPoint);
+    void editImage(QPoint);
+    void erasePressed();
+    void drawPressed();
+    void savePressed();
 };
 
 #endif // MODEL_H

@@ -19,6 +19,8 @@ public:
     void drawSpray(QPoint, int);
     //void drawPixel(QPoint);
     void setImage(QImage&);
+    void eraseTool(QPoint);
+    QImage getImage();
 
 private:
     QColor color;

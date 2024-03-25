@@ -23,7 +23,6 @@ QColor Draw::getColor()
 
 void Draw::setColor(QColor)
 {
-
 }
 
 void Draw::drawSquare(QPoint, int)
@@ -48,13 +47,22 @@ void Draw::drawSpray(QPoint, int)
 
 void Draw::drawPixel(QPoint point)
 {
-    //QRgb black = qRgb(0, 0, 0);
     image->setPixelColor(point, Qt::black);
 }
 
 void Draw::setImage(QImage& image)
 {
     this->image = &image;
+}
+
+void Draw::eraseTool(QPoint point)
+{
+    image->setPixelColor(point, Qt::transparent);
+}
+
+QImage Draw::getImage()
+{
+    return *image;
 }
 
 void Draw::drawImage(QPoint point)

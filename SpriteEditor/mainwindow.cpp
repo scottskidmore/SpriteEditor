@@ -11,12 +11,27 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(ui->canvas,
             &Canvas::gridClicked,
             m,
-            &model::drawImage);
+            &model::editImage);
 
     QObject::connect(&m->f,
             &Frame::updateImage,
             ui->canvas,
             &Canvas::updateCanvas);
+
+    QObject::connect(ui->ActionDraw,
+            &QAction::triggered,
+            m,
+            &model::drawPressed);
+
+    QObject::connect(ui->actionErase,
+            &QAction::triggered,
+            m,
+            &model::erasePressed);
+
+    QObject::connect(ui->actionSave,
+                     &QAction::triggered,
+                     m,
+                     &model::savePressed);
 
     m->setDrawLayer();
 }

@@ -12,13 +12,13 @@ public:
     void addFrame(Frame frame);
     void deleteFrame(Frame *frame);
     void setfps(int);
-    void loadFile(QFile file);
-    void saveFile(QFile file);
+    void loadFile(std::string file);
+    void saveFile(std::string file);
 
 private:
     std::list<Frame> frames;
     int fps;
-    QFile savedFile;
+    std::string savedFile;
 };
 
 #endif // ANIMATION_H

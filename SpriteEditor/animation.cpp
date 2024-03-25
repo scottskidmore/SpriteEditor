@@ -17,12 +17,12 @@ void Animation::setfps(int)
 
 }
 
-void Animation::loadFile(QFile file)
+void Animation::loadFile(std::string file)
 {
 
 }
 
-void Animation::saveFile(QFile file)
+void Animation::saveFile(std::string file)
 {
 
 }
