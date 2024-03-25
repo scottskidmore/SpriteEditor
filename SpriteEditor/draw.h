@@ -23,7 +23,7 @@ public:
 private:
     QColor color;
     int lineWidth;
-    QImage image;
+    QImage* image;
 
 public slots:
     void drawImage(QPoint);

@@ -2,7 +2,9 @@
 
 Draw::Draw(QObject *parent)
     : QObject{parent}
-{}
+{
+
+}
 
 int Draw::getLineWdith()
 {
@@ -47,12 +49,12 @@ void Draw::drawSpray(QPoint, int)
 void Draw::drawPixel(QPoint point)
 {
     //QRgb black = qRgb(0, 0, 0);
-    image.setPixelColor(point, Qt::black);
+    image->setPixelColor(point, Qt::black);
 }
 
 void Draw::setImage(QImage& image)
 {
-    this->image = image;
+    this->image = &image;
 }
 
 void Draw::drawImage(QPoint point)
