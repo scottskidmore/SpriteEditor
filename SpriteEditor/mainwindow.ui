@@ -39,6 +39,32 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="chooseColor">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>450</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Choose Color</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="colorLabel">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>466</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -46,7 +72,7 @@
      <x>0</x>
      <y>0</y>
      <width>1286</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

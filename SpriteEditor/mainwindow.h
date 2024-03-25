@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "model.h"
 #include "canvas.h"
+#include <QColorDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,6 +22,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void chooseColor();
 
 public slots:
     //void onGridClicked(QPoint);
