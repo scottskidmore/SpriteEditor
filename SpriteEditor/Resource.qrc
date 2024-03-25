@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/menuIcons">
+        <file>images/Eraser Icon.png</file>
+        <file>images/Pen Icon.png</file>
+        <file>images/Load.png</file>
+        <file>images/New.png</file>
+        <file>images/Save.png</file>
+        <file>images/SprayPaint.png</file>
+    </qresource>
+</RCC>
