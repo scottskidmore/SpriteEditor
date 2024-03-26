@@ -37,10 +37,13 @@ void Canvas::paintEvent(QPaintEvent *event) {
     // change later for layers
     if (!layers.empty()) {
         qDebug() << "printing layer, layersSize: " << layers.size();
-        QPixmap map = QPixmap::fromImage(layers[0]);
-        map = map.scaled(512, 512);
-        map.toImage().save(QString("image2.png"));
-        painter.drawPixmap(0, 0, 512, 512, map);
+       // QPixmap map = QPixmap::fromImage(layers[0]);
+        for(QImage layer : layers){
+            painter.drawPixmap(0, 0,512,512, QPixmap::fromImage(layer));
+        }
+        //map = map.scaled(512, 512);
+        //map.toImage().save(QString("image2.png"));
+       // painter.drawPixmap(0, 0, 512, 512, map);
     }
 }
 
