@@ -39,6 +39,11 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::chooseColor);
 
+    QObject::connect(&m->f,
+                     &Frame::updateImage,
+                     this,
+                     &MainWindow::updateFrameDisplay);
+
 
     m->setDrawLayer();
     this->m = m;
@@ -50,6 +55,22 @@ void MainWindow::chooseColor() {
     if (color.isValid()) {
         ui->colorLabel->setStyleSheet("background-color: " + color.name() + ";");
         m->pen.setColor(color);
+    }
+}
+
+void MainWindow::onAddFrame()
+{
+
+}
+
+void MainWindow::updateFrameDisplay(std::vector<QImage> images)
+{
+    QObjectList children = ui->scrollArea->widget()->children();
+    for (int i = 0; i < images.size() && i < children.size(); i++) {
+        QLabel *c = qobject_cast<QLabel*>(children[i]);
+        QPixmap m;
+        m.convertFromImage(images[i]);
+        c->setPixmap(m);
     }
 }
 

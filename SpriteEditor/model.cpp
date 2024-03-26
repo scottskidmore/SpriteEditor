@@ -7,6 +7,7 @@ model::model(QObject *parent)
 {
     //currentTool = 'd';
     currentTool = Pen;
+    f.frameID = 0;
 }
 
 void model::setDrawLayer()

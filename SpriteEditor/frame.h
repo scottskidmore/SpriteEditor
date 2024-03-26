@@ -12,10 +12,12 @@ public:
     explicit Frame(QObject *parent = nullptr);
     void drawPixel(QPoint);
     QImage& getCurrentLayer();
+    int frameID;
+
 
 private:
     std::vector<QImage> images;
-    int frameID;
+
     int currentImage;
 
 signals:

@@ -27,5 +27,7 @@ private:
 
 public slots:
     //void onGridClicked(QPoint);
+    void onAddFrame();
+    void updateFrameDisplay(std::vector<QImage> images);
 };
 #endif // MAINWINDOW_H
