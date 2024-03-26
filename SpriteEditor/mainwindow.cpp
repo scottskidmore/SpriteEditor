@@ -44,6 +44,11 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::updateFrameDisplay);
 
+    QObject::connect(ui->addFrameButton,
+                     &QPushButton::clicked,
+                     this,
+                     &MainWindow::onAddFrame);
+
 
     m->setDrawLayer();
     this->m = m;
@@ -60,17 +65,23 @@ void MainWindow::chooseColor() {
 
 void MainWindow::onAddFrame()
 {
-
+    QPushButton *button = new QPushButton(this);
+    button->setMaximumSize(64, 64);
+    button->setMinimumSize(64, 64);
+    button->setGeometry(75, 10, 64, 64);
+    ui->scrollFrameBox->addWidget(button);
 }
 
 void MainWindow::updateFrameDisplay(std::vector<QImage> images)
 {
-    QObjectList children = ui->scrollArea->widget()->children();
+    QObjectList children = ui->horizontalLayout->children();
     for (int i = 0; i < images.size() && i < children.size(); i++) {
-        QLabel *c = qobject_cast<QLabel*>(children[i]);
+        QPushButton *c = qobject_cast<QPushButton*>(children[i]);
         QPixmap m;
         m.convertFromImage(images[i]);
-        c->setPixmap(m);
+        QIcon icon(m);
+        c->setIcon(icon);
+        c->setIconSize(m.rect().size());
     }
 }
 

@@ -81,10 +81,10 @@
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>420</x>
       <y>530</y>
-      <width>381</width>
-      <height>91</height>
+      <width>361</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
@@ -101,36 +101,64 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>379</width>
-       <height>79</height>
+       <width>359</width>
+       <height>89</height>
       </rect>
      </property>
-     <widget class="QLabel" name="frame0">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>5</y>
-        <width>64</width>
-        <height>64</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="scrollFrameBox">
+        <item>
+         <widget class="QPushButton" name="frame0">
+          <property name="minimumSize">
+           <size>
+            <width>64</width>
+            <height>64</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>64</width>
+            <height>64</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border-color: rgb(0, 0, 0);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QPushButton" name="addFrameButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>530</y>
+      <x>330</x>
+      <y>570</y>
       <width>80</width>
       <height>18</height>
      </rect>
     </property>
     <property name="text">
      <string>Add Frame</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="removeFrameButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>600</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Remove Frame</string>
     </property>
    </widget>
   </widget>
