@@ -23,7 +23,9 @@ public:
 
 
 private:
-    char currentTool;
+    //char currentTool;
+    enum tools {Pen, Eraser, Square, Circle};
+    tools currentTool;
 
 public slots:
     void editImage(QPoint);

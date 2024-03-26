@@ -5,7 +5,8 @@
 model::model(QObject *parent)
     : QObject{parent}
 {
-    currentTool = 'd';
+    //currentTool = 'd';
+    currentTool = Pen;
 }
 
 void model::setDrawLayer()
@@ -15,9 +16,9 @@ void model::setDrawLayer()
 
 void model::editImage(QPoint p)
 {
-    if (currentTool == 'd')
+    if (currentTool == Pen)
         pen.drawPixel(p);
-    else if (currentTool == 'e')
+    else if (currentTool == Eraser)
         pen.eraseTool(p);
 
     f.sendImages();
@@ -25,12 +26,12 @@ void model::editImage(QPoint p)
 
 void model::erasePressed()
 {
-    currentTool = 'e';
+    currentTool = Eraser;
 }
 
 void model::drawPressed()
 {
-    currentTool = 'd';
+    currentTool = Pen;
 }
 
 void model::savePressed()
