@@ -2,22 +2,25 @@
 #define ANIMATION_H
 
 #include "frame.h"
-#include <list>
+#include <QLabel>
 #include <QFile>
 
-class Animation
+class Animation : public QLabel
 {
+    Q_OBJECT
 public:
-    Animation();
-    void addFrame(Frame frame);
+    explicit Animation(QWidget *parent = nullptr);
+    void addFrame(Frame *frame);
     void deleteFrame(Frame *frame);
     void setfps(int);
     void loadFile(std::string file);
     void saveFile(std::string file);
+    void setImage();
 
 private:
-    std::list<Frame> frames;
+    std::vector<Frame*> frames;
     int fps;
+    int currentFrame=0;
     std::string savedFile;
 };
 
