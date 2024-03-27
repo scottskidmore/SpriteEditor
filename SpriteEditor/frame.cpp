@@ -50,6 +50,7 @@ void Frame::updateImageSize64(){
     newImage.fill(Qt::transparent);
     images.push_back(newImage);
     emit updateImage(images);
-void Frame::setCurrentLayer(int i){
+}
+ void Frame::setCurrentLayer(int i){
     currentImage=i;
 }
