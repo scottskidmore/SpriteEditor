@@ -81,3 +81,20 @@ void Canvas::updateCanvas(std::vector<QImage> newLayers)
     std::swap(layers, newLayers);
 }
 
+void Canvas::updateGridSize16(){
+
+    setGridSize(16);
+    QWidget::update();
+}
+
+void Canvas::updateGridSize32(){
+
+    setGridSize(32);
+    QWidget::update();
+}
+
+void Canvas::updateGridSize64(){
+
+    setGridSize(64);
+    QWidget::update();
+}

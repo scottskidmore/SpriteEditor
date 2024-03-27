@@ -44,10 +44,42 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::updateFrameDisplay);
 
+<<<<<<< Updated upstream
     QObject::connect(ui->addFrameButton,
                      &QPushButton::clicked,
                      this,
                      &MainWindow::onAddFrame);
+=======
+    QObject::connect(ui->size16,
+                     &QPushButton::clicked,
+                     ui->canvas,
+                     ui->canvas->updateGridSize16);
+
+    QObject::connect(ui->size32,
+                     &QPushButton::clicked,
+                     ui->canvas,
+                     ui->canvas->updateGridSize32);
+
+    QObject::connect(ui->size64,
+                     &QPushButton::clicked,
+                     ui->canvas,
+                     ui->canvas->updateGridSize64);
+
+    QObject::connect(ui->size16,
+                     &QPushButton::clicked,
+                     &m->f,
+                     &Frame::updateImageSize16);
+
+    QObject::connect(ui->size32,
+                     &QPushButton::clicked,
+                     &m->f,
+                     &Frame::updateImageSize32);
+
+    QObject::connect(ui->size64,
+                     &QPushButton::clicked,
+                     &m->f,
+                     &Frame::updateImageSize64);
+>>>>>>> Stashed changes
 
 
     m->setDrawLayer();
