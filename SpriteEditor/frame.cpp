@@ -6,12 +6,16 @@ Frame::Frame(QObject *parent)
     //newImage.setPixelColor(16, 16, Qt::blue);
     newImage.fill(Qt::transparent);
     images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
     currentImage = 0;
 }
 
 void Frame::drawPixel(QPoint point)
 {
-    images[0].setPixelColor(point, Qt::black);
+    images[currentImage].setPixelColor(point, Qt::black);
 }
 
 QImage& Frame::getCurrentLayer()
@@ -46,4 +50,6 @@ void Frame::updateImageSize64(){
     newImage.fill(Qt::transparent);
     images.push_back(newImage);
     emit updateImage(images);
+void Frame::setCurrentLayer(int i){
+    currentImage=i;
 }

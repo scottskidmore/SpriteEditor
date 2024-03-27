@@ -44,6 +44,32 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::updateFrameDisplay);
 
+    QObject::connect(ui->layer1,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer1);
+
+    QObject::connect(ui->layer2,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer2);
+
+    QObject::connect(ui->layer3,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer3);
+
+    QObject::connect(ui->layer4,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer4);
+
+    QObject::connect(ui->layer5,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer5);
+
+
 
     QObject::connect(ui->addFrameButton,
                      &QPushButton::clicked,

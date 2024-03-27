@@ -13,6 +13,7 @@ public:
     void drawPixel(QPoint);
     QImage& getCurrentLayer();
     int frameID;
+    void setCurrentLayer(int);
 
 
 private:

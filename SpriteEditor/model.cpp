@@ -17,6 +17,7 @@ void model::setDrawLayer()
 
 void model::editImage(QPoint p)
 {
+    setDrawLayer();
     if (currentTool == Pen)
         pen.drawPixel(p);
     else if (currentTool == Eraser)
@@ -75,5 +76,25 @@ void model::savePressed()
     testImage.loadFromData(imageData);
 
     testImage.save("testImage.png", "PNG");
+}
+
+void model::layer1(){
+    this->f.setCurrentLayer(0);
+}
+
+void model::layer2(){
+    this->f.setCurrentLayer(1);
+}
+
+void model::layer3(){
+    this->f.setCurrentLayer(2);
+}
+
+void model::layer4(){
+    this->f.setCurrentLayer(3);
+}
+
+void model::layer5(){
+    this->f.setCurrentLayer(4);
 }
 

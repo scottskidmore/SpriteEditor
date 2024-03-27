@@ -32,6 +32,11 @@ public slots:
     void erasePressed();
     void drawPressed();
     void savePressed();
+    void layer1();
+    void layer2();
+    void layer3();
+    void layer4();
+    void layer5();
 };
 
 #endif // MODEL_H
