@@ -13,18 +13,21 @@ public:
     void drawPixel(QPoint);
     QImage& getCurrentLayer();
     int frameID;
+    std::vector<QImage> images;
 
 
 private:
-    std::vector<QImage> images;
+    //std::vector<QImage> images;
 
     int currentImage;
 
 signals:
     void updateImage(std::vector<QImage>);
+    void changeFrame(int id);
 
 public slots:
     void sendImages();
+    void frameButtonPressed();
 };
 
 #endif // FRAME_H

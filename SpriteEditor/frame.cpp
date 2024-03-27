@@ -23,3 +23,8 @@ void Frame::sendImages()
 {
     emit updateImage(images);
 }
+
+void Frame::frameButtonPressed()
+{
+    emit changeFrame(this->frameID);
+}

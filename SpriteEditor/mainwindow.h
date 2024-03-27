@@ -25,9 +25,15 @@ private:
     model* m;
     void chooseColor();
 
+signals:
+    void frameButtonAdded();
+
 public slots:
     //void onGridClicked(QPoint);
     void onAddFrame();
     void updateFrameDisplay(std::vector<QImage> images);
+    void connectButtonFrame();
+    void connectNewFrame();
+    void onRemoveFrame();
 };
 #endif // MAINWINDOW_H

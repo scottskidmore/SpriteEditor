@@ -9,6 +9,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QBuffer>
+#include <QPushButton>
+#include <QObject>
 
 class model : public QObject
 {
@@ -18,7 +20,7 @@ public:
     //model();
     Draw pen;
     Animation a;
-    Frame f;
+    Frame* f;
     void setDrawLayer();
 
 
@@ -26,12 +28,20 @@ private:
     //char currentTool;
     enum tools {Pen, Eraser, Square, Circle};
     tools currentTool;
+    void getFrameImages();
+
+signals:
+    void connectFrameButton();
+    void connectFrameUpdate();
+    void updateFrameDisplay(std::vector<QImage> images);
 
 public slots:
     void editImage(QPoint);
     void erasePressed();
     void drawPressed();
     void savePressed();
+    void addFrame();
+    void switchFrame(int id);
 };
 
 #endif // MODEL_H

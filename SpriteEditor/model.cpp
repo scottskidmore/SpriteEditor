@@ -6,13 +6,27 @@ model::model(QObject *parent)
     : QObject{parent}
 {
     //currentTool = 'd';
+
     currentTool = Pen;
-    f.frameID = 0;
+    f = new Frame();
+    f->frameID = 0;
+    a.addFrame(f);
+    //QObject::connect(f, &Frame::changeFrame, this, &model::switchFrame);
 }
 
 void model::setDrawLayer()
 {
-    pen.setImage(f.getCurrentLayer());
+    pen.setImage(f->getCurrentLayer());
+}
+
+void model::getFrameImages()
+{
+    std::vector<QImage> imageList;
+    for(int i = 0; i < (int)a.frames.size(); i++) {
+        imageList.push_back(a.frames[i]->images[0]);
+    }
+
+    emit updateFrameDisplay(imageList);
 }
 
 void model::editImage(QPoint p)
@@ -22,7 +36,8 @@ void model::editImage(QPoint p)
     else if (currentTool == Eraser)
         pen.eraseTool(p);
 
-    f.sendImages();
+    f->sendImages();
+    getFrameImages();
 }
 
 void model::erasePressed()
@@ -42,7 +57,7 @@ void model::savePressed()
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     buffer.open(QIODevice::WriteOnly);
-    f.getCurrentLayer().save(&buffer, "PNG");
+    f->getCurrentLayer().save(&buffer, "PNG");
 
     QString base64Image = QString::fromLatin1(byteArray.toBase64().data());
 
@@ -75,5 +90,22 @@ void model::savePressed()
     testImage.loadFromData(imageData);
 
     testImage.save("testImage.png", "PNG");
+}
+
+void model::addFrame()
+{
+    Frame* newF = new Frame();
+    newF->frameID = (int)a.frames.size();
+    a.addFrame(newF);
+    emit connectFrameButton();
+}
+
+void model::switchFrame(int id)
+{
+    this->f = a.frames[id];
+    setDrawLayer();
+    emit connectFrameUpdate();
+    f->sendImages();
+    getFrameImages();
 }
 
