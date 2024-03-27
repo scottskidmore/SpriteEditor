@@ -33,6 +33,10 @@ void Frame::updateImageSize16(){
     QImage newImage(16, 16, QImage::Format_ARGB32);
     newImage.fill(Qt::transparent);
     images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
     emit updateImage(images);
 }
 
@@ -41,6 +45,10 @@ void Frame::updateImageSize32(){
     QImage newImage(32, 32, QImage::Format_ARGB32);
     newImage.fill(Qt::transparent);
     images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
     emit updateImage(images);
 }
 
@@ -48,6 +56,10 @@ void Frame::updateImageSize64(){
     images.clear();
     QImage newImage(64, 64, QImage::Format_ARGB32);
     newImage.fill(Qt::transparent);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
+    images.push_back(newImage);
     images.push_back(newImage);
     emit updateImage(images);
 }
