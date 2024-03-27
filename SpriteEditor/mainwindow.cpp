@@ -74,11 +74,11 @@ void MainWindow::onAddFrame()
 
 void MainWindow::updateFrameDisplay(std::vector<QImage> images)
 {
-    QObjectList children = ui->horizontalLayout->children();
-    for (int i = 0; i < images.size() && i < children.size(); i++) {
+    QObjectList children = ui->scrollAreaContents->children();
+    for (int i = 1; i <= images.size() && i < children.size(); i++) {
         QPushButton *c = qobject_cast<QPushButton*>(children[i]);
         QPixmap m;
-        m.convertFromImage(images[i]);
+        m.convertFromImage(images[i-1]);
         QIcon icon(m);
         c->setIcon(icon);
         c->setIconSize(m.rect().size());
