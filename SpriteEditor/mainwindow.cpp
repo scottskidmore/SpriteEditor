@@ -78,17 +78,17 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
                      ui->canvas,
-                     ui->canvas->updateGridSize16);
+                     &Canvas::updateGridSize16);
 
     QObject::connect(ui->size32,
                      &QPushButton::clicked,
                      ui->canvas,
-                     ui->canvas->updateGridSize32);
+                     &Canvas::updateGridSize32);
 
     QObject::connect(ui->size64,
                      &QPushButton::clicked,
                      ui->canvas,
-                     ui->canvas->updateGridSize64);
+                     &Canvas::updateGridSize64);
 
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
