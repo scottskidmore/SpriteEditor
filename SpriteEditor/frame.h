@@ -25,6 +25,9 @@ signals:
 
 public slots:
     void sendImages();
+    void updateImageSize16();
+    void updateImageSize32();
+    void updateImageSize64();
 };
 
 #endif // FRAME_H
