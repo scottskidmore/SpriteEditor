@@ -78,6 +78,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &QPushButton::clicked,
                      this,
                      &MainWindow::onRemoveFrame);
+    QObject::connect(this,
+                     &MainWindow::frameButtonRemoved,
+                     m,
+                     &model::deleteFrame);
 
     m->setDrawLayer();
     this->m = m;
@@ -134,12 +138,13 @@ void MainWindow::onRemoveFrame()
 {
     QObjectList children = ui->scrollAreaContents->children();
     int index = children.size() - 1;
-    //if (index > 1) {
-        //QPushButton *c = qobject_cast<QPushButton*>(children[index]);
-        //ui->scrollFrameBox->removeWidget(c);
-    //}
+    if (index > 1) {
+        QPushButton *c = qobject_cast<QPushButton*>(children[index]);
+        ui->scrollFrameBox->removeWidget(c);
 
-
+        emit frameButtonRemoved();
+    }
+    ui->canvas->update();
 }
 
 

@@ -27,6 +27,7 @@ private:
 
 signals:
     void frameButtonAdded();
+    void frameButtonRemoved();
 
 public slots:
     //void onGridClicked(QPoint);

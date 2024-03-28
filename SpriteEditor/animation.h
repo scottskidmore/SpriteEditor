@@ -15,9 +15,10 @@ public:
     void setfps(int);
     void setImage();
     std::vector<Frame*> frames;
+    int fps;
 
 private:
-    int fps;
+    //int fps;
     int currentFrame=0;
     std::string savedFile;
 };

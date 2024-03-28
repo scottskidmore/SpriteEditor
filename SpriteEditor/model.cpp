@@ -52,6 +52,41 @@ void model::drawPressed()
 
 void model::savePressed()
 {
+    QJsonObject animationData;
+    QJsonArray frames;
+    int count = 0;
+
+    animationData["fps"] = a.fps;
+    for (auto frame : a.frames)
+    {
+        QJsonObject frameObj;
+        frameObj["frameID"] = frame->frameID;
+        frames.append(frameObj);
+        //for (auto pixel : )
+
+        for (auto layer : frame->images)
+        {
+            QJsonObject image;
+            image["layerID"] = count;
+            count++;
+        }
+    }
+    animationData.insert("frames", frames);
+
+    QJsonDocument docTest(animationData);
+    QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
+    qDebug() << "serialized: " << dataTest;
+
+    QFile fileTest(QString("testBasic.json"));
+
+    if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&fileTest);
+        out << dataTest;
+        fileTest.close();
+        qDebug() << "written";
+    }
+
+    // old code
     QJsonObject json;
 
     QByteArray byteArray;
@@ -108,5 +143,16 @@ void model::switchFrame(int id)
     emit connectFrameUpdate();
     f->sendImages();
     getFrameImages();
+}
+
+void model::deleteFrame()
+{
+    if (a.frames.size() > 1)
+    {
+        a.frames.pop_back();
+    }
+    switchFrame(a.frames[a.frames.size() - 1]->frameID);
+    getFrameImages();
+    qDebug() << a.frames.size();
 }
 

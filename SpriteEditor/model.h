@@ -42,6 +42,7 @@ public slots:
     void savePressed();
     void addFrame();
     void switchFrame(int id);
+    void deleteFrame();
 };
 
 #endif // MODEL_H
