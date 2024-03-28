@@ -26,19 +26,20 @@ void Draw::setColor(QColor c)
     color = c;
 }
 
-void Draw::drawSquare(QPoint, int)
+void Draw::drawSquare(QPoint p , int width)
 {
-
+    QPainter painter(this->image);
+    painter.setPen(color);
+    //painter.setBrush(color);
+    painter.drawRect(p.x(), p.y(), width, width);
 }
 
-void Draw::drawCircle(QPoint, int)
+void Draw::drawCircle(QPoint p, int diameter)
 {
-
-}
-
-void Draw::drawTraingle(QPoint, int)
-{
-
+    QPainter painter(this->image);
+    painter.setPen(color);
+    //painter.setBrush(color);
+    painter.drawEllipse(p.x(), p.y(), diameter, diameter);
 }
 
 void Draw::drawSpray(QPoint, int)

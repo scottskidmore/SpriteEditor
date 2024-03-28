@@ -22,6 +22,10 @@ void model::editImage(QPoint p)
         pen.drawPixel(p);
     else if (currentTool == Eraser)
         pen.eraseTool(p);
+    else if (currentTool == Circle)
+        pen.drawCircle(p, 5);
+    else if (currentTool == Square)
+        pen.drawSquare(p, 5);
 
     f.sendImages();
 }
@@ -76,6 +80,16 @@ void model::savePressed()
     testImage.loadFromData(imageData);
 
     testImage.save("testImage.png", "PNG");
+}
+
+void model::circlePressed()
+{
+    currentTool = Circle;
+}
+
+void model::squarePressed()
+{
+    currentTool = Square;
 }
 
 void model::layer1(){

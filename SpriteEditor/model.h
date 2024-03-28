@@ -32,6 +32,8 @@ public slots:
     void erasePressed();
     void drawPressed();
     void savePressed();
+    void circlePressed();
+    void squarePressed();
     void layer1();
     void layer2();
     void layer3();

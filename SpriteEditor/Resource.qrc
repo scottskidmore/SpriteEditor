@@ -8,5 +8,7 @@
         <file>images/SprayPaint.png</file>
         <file>images/Rench.png</file>
         <file>images/Shape.png</file>
+        <file>images/circle.png</file>
+        <file>images/square.png</file>
     </qresource>
 </RCC>

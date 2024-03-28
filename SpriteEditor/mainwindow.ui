@@ -23,8 +23,6 @@
    <widget class="Canvas" name="canvas">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>20</y>
       <x>380</x>
       <y>100</y>
       <width>512</width>
@@ -104,7 +102,7 @@
        <x>0</x>
        <y>0</y>
        <width>359</width>
-       <height>89</height>
+       <height>88</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -212,7 +210,6 @@
      </rect>
     </property>
     <property name="text">
-     <string>16x16</string>
      <string>Layer 1</string>
     </property>
    </widget>
@@ -275,7 +272,7 @@
      <x>0</x>
      <y>0</y>
      <width>1286</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -304,7 +301,8 @@
    </attribute>
    <addaction name="ActionDraw"/>
    <addaction name="actionSpray_Paint"/>
-   <addaction name="actionShape"/>
+   <addaction name="actionCircle"/>
+   <addaction name="actionSquare"/>
    <addaction name="actionErase"/>
    <addaction name="separator"/>
    <addaction name="actionNew"/>
@@ -403,21 +401,6 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
-  <action name="actionShape">
-   <property name="icon">
-    <iconset resource="Resource.qrc">
-     <normaloff>:/menuIcons/images/Shape.png</normaloff>:/menuIcons/images/Shape.png</iconset>
-   </property>
-   <property name="text">
-    <string>Shape</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Alt+S</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
   <action name="actionHelp">
    <property name="icon">
     <iconset resource="Resource.qrc">
@@ -428,6 +411,39 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionCircle">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menuIcons/images/circle.png</normaloff>:/menuIcons/images/circle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Circle</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSquare">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menuIcons/images/square.png</normaloff>:/menuIcons/images/square.png</iconset>
+   </property>
+   <property name="text">
+    <string>Square</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw Square</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

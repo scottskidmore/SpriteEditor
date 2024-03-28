@@ -23,6 +23,17 @@ MainWindow::MainWindow(model *m, QWidget *parent)
             m,
             &model::drawPressed);
 
+    QObject::connect(ui->actionSquare,
+                     &QAction::triggered,
+                     m,
+                     &model::squarePressed);
+
+    QObject::connect(ui->actionCircle,
+                     &QAction::triggered,
+                     m,
+                     &model::circlePressed);
+
+
     QObject::connect(ui->actionErase,
             &QAction::triggered,
             m,
