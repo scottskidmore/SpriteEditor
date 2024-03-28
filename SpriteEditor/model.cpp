@@ -60,16 +60,42 @@ void model::savePressed()
     for (auto frame : a.frames)
     {
         QJsonObject frameObj;
+        QJsonArray layers;
         frameObj["frameID"] = frame->frameID;
-        frames.append(frameObj);
+        frameObj["layers"] = layers;
+        //frames.append(frameObj);
         //for (auto pixel : )
 
         for (auto layer : frame->images)
         {
             QJsonObject image;
             image["layerID"] = count;
+            QJsonArray pixels;
+            //image["pixels"] = pixels;
+            //pixels = layer->pixels;
+            //frames.pixels;
+            for (int height = 0; height < layer.height(); height++){
+                QRgb *row = (QRgb*) layer.scanLine(height);
+                for (int width = 0; width < layer.width(); width++){
+                    QJsonObject pixel;
+                    QColor color(row[width]);
+                    pixel["red"] = color.red();
+                    pixel["green"] = color.green();
+                    pixel["blue"] = color.blue();
+                    pixel["alpha"] = color.alpha();
+
+                    //pixel.insert("RGB value: " , row[width].toObject());
+                    //pixel["rgbValue"] = pixel;
+                    pixels.append(pixel);
+                }
+            }
+            image.insert("pixels", pixels);
+            layers.append(image);
             count++;
         }
+        frameObj.insert("layers", layers);
+
+        frames.append(frameObj);
     }
     animationData.insert("frames", frames);
 
@@ -77,7 +103,7 @@ void model::savePressed()
     QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
     qDebug() << "serialized: " << dataTest;
 
-    QFile fileTest(QString("testBasic.json"));
+    QFile fileTest(QString("testBasic2.json"));
 
     if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&fileTest);
@@ -85,6 +111,10 @@ void model::savePressed()
         fileTest.close();
         qDebug() << "written";
     }
+
+
+
+
 
     // old code
     QJsonObject json;
