@@ -97,6 +97,7 @@ void model::addFrame()
     Frame* newF = new Frame();
     newF->frameID = (int)a.frames.size();
     a.addFrame(newF);
+    switchFrame(newF->frameID);
     emit connectFrameButton();
 }
 
