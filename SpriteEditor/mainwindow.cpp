@@ -23,6 +23,17 @@ MainWindow::MainWindow(model *m, QWidget *parent)
             m,
             &model::drawPressed);
 
+    QObject::connect(ui->actionSquare,
+                     &QAction::triggered,
+                     m,
+                     &model::squarePressed);
+
+    QObject::connect(ui->actionCircle,
+                     &QAction::triggered,
+                     m,
+                     &model::circlePressed);
+
+
     QObject::connect(ui->actionErase,
             &QAction::triggered,
             m,
@@ -44,10 +55,67 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::updateFrameDisplay);
 
+    QObject::connect(ui->layer1,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer1);
+
+    QObject::connect(ui->layer2,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer2);
+
+    QObject::connect(ui->layer3,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer3);
+
+    QObject::connect(ui->layer4,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer4);
+
+    QObject::connect(ui->layer5,
+                     &QPushButton::clicked,
+                     m,
+                     &model::layer5);
+
+
+
     QObject::connect(ui->addFrameButton,
                      &QPushButton::clicked,
                      this,
                      &MainWindow::onAddFrame);
+    QObject::connect(ui->size16,
+                     &QPushButton::clicked,
+                     ui->canvas,
+                     &Canvas::updateGridSize16);
+
+    QObject::connect(ui->size32,
+                     &QPushButton::clicked,
+                     ui->canvas,
+                     &Canvas::updateGridSize32);
+
+    QObject::connect(ui->size64,
+                     &QPushButton::clicked,
+                     ui->canvas,
+                     &Canvas::updateGridSize64);
+
+    QObject::connect(ui->size16,
+                     &QPushButton::clicked,
+                     &m->f,
+                     &Frame::updateImageSize16);
+
+    QObject::connect(ui->size32,
+                     &QPushButton::clicked,
+                     &m->f,
+                     &Frame::updateImageSize32);
+
+    QObject::connect(ui->size64,
+                     &QPushButton::clicked,
+                     &m->f,
+                     &Frame::updateImageSize64);
+
 
     QObject::connect(ui->frame0,
                      &QPushButton::clicked,

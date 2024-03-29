@@ -33,6 +33,9 @@ signals:
     void gridClicked(QPoint);
 public slots:
     void updateCanvas(std::vector<QImage>);
+    void updateGridSize16();
+    void updateGridSize32();
+    void updateGridSize64();
 };
 
 #endif // CANVAS_H

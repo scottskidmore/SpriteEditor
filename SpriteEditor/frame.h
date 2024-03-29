@@ -15,10 +15,11 @@ public:
     int frameID;
     std::vector<QImage> images;
 
+private:
+    void setCurrentLayer(int);
+    std::vector<QImage> images;
 
 private:
-    //std::vector<QImage> images;
-
     int currentImage;
 
 signals:
@@ -28,6 +29,10 @@ signals:
 public slots:
     void sendImages();
     void frameButtonPressed();
+    void updateImageSize16();
+    void updateImageSize32();
+    void updateImageSize64();
+
 };
 
 #endif // FRAME_H

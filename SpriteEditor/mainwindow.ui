@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1286</width>
-    <height>665</height>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>40</y>
+      <y>30</y>
       <width>512</width>
       <height>512</height>
      </rect>
@@ -82,7 +82,7 @@
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>530</y>
+      <y>560</y>
       <width>361</width>
       <height>101</height>
      </rect>
@@ -102,7 +102,7 @@
        <x>0</x>
        <y>0</y>
        <width>359</width>
-       <height>89</height>
+       <height>88</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -139,7 +139,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>570</y>
+      <y>590</y>
       <width>80</width>
       <height>18</height>
      </rect>
@@ -152,13 +152,136 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>600</y>
+      <y>620</y>
       <width>80</width>
       <height>18</height>
      </rect>
     </property>
     <property name="text">
-     <string>Remove Frame</string>
+     <string>Remove</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="size32">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>420</y>
+      <width>41</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>32X32</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="size64">
+    <property name="geometry">
+     <rect>
+      <x>1150</x>
+      <y>420</y>
+      <width>41</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>64X64</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="size16">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>420</y>
+      <width>41</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>16X16</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="layer1">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>120</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Layer 1</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="layer2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>140</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Layer 2</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="layer3">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>160</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Layer 3</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="layer4">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>180</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Layer 4</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="layer5">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>200</y>
+      <width>80</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Layer 5</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>280</y>
+      <width>101</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Careful: Changing Sprite dimensions will reset the image</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -168,7 +291,7 @@
      <x>0</x>
      <y>0</y>
      <width>1286</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -197,11 +320,14 @@
    </attribute>
    <addaction name="ActionDraw"/>
    <addaction name="actionSpray_Paint"/>
+   <addaction name="actionCircle"/>
+   <addaction name="actionSquare"/>
    <addaction name="actionErase"/>
    <addaction name="separator"/>
    <addaction name="actionNew"/>
    <addaction name="actionLoad"/>
    <addaction name="actionSave"/>
+   <addaction name="actionHelp"/>
    <addaction name="separator"/>
   </widget>
   <action name="ActionDraw">
@@ -294,6 +420,54 @@
     <enum>QAction::NoRole</enum>
    </property>
   </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menuIcons/images/Rench.png</normaloff>:/menuIcons/images/Rench.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionCircle">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menuIcons/images/circle.png</normaloff>:/menuIcons/images/circle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Circle</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSquare">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/menuIcons/images/square.png</normaloff>:/menuIcons/images/square.png</iconset>
+   </property>
+   <property name="text">
+    <string>Square</string>
+   </property>
+   <property name="toolTip">
+    <string>Draw Square</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -304,7 +478,7 @@
   <customwidget>
    <class>Animation</class>
    <extends>QLabel</extends>
-   <header location="global">animation.h</header>
+   <header>animation.h</header>
   </customwidget>
  </customwidgets>
  <resources>
