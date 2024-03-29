@@ -23,7 +23,14 @@ void model::getFrameImages()
 {
     std::vector<QImage> imageList;
     for(int i = 0; i < (int)a.frames.size(); i++) {
-        imageList.push_back(a.frames[i]->images[0]);
+        int size = a.frames[i]->imageSize;
+        QImage image(size, size, QImage::Format_ARGB32);
+        image.fill(Qt::transparent);
+        QPainter paint(&image);
+        for (int j = 0; j < (int)a.frames[i]->images.size(); j++) {
+            paint.drawPixmap(0, 0, size, size, QPixmap::fromImage(a.frames[i]->images[j]));
+        }
+        imageList.push_back(image);
     }
 
     emit updateFrameDisplay(imageList);

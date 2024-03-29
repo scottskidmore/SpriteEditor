@@ -15,6 +15,7 @@ public:
     int frameID;
     std::vector<QImage> images;
     void setCurrentLayer(int);
+    int imageSize;
 
 private:
     int currentImage;

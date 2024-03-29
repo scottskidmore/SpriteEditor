@@ -11,6 +11,7 @@ Frame::Frame(QObject *parent)
     images.push_back(newImage);
     images.push_back(newImage);
     currentImage = 0;
+    imageSize = 32;
 }
 
 void Frame::drawPixel(QPoint point)
@@ -42,6 +43,7 @@ void Frame::updateImageSize16(){
     images.push_back(newImage);
     images.push_back(newImage);
     images.push_back(newImage);
+    imageSize = 16;
     emit updateImage(images);
 }
 
@@ -54,6 +56,7 @@ void Frame::updateImageSize32(){
     images.push_back(newImage);
     images.push_back(newImage);
     images.push_back(newImage);
+    imageSize = 32;
     emit updateImage(images);
 }
 
@@ -66,6 +69,7 @@ void Frame::updateImageSize64(){
     images.push_back(newImage);
     images.push_back(newImage);
     images.push_back(newImage);
+    imageSize = 64;
     emit updateImage(images);
 }
  void Frame::setCurrentLayer(int i){
