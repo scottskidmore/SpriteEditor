@@ -14,11 +14,9 @@ public:
     QImage& getCurrentLayer();
     int frameID;
     void setCurrentLayer(int);
-
-
-private:
     std::vector<QImage> images;
 
+private:
     int currentImage;
 
 signals:

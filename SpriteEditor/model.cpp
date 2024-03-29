@@ -42,44 +42,117 @@ void model::drawPressed()
 
 void model::savePressed()
 {
-    QJsonObject json;
+    QJsonObject animationData;
+    QJsonArray frames;
+    int count = 0;
 
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    buffer.open(QIODevice::WriteOnly);
-    f.getCurrentLayer().save(&buffer, "PNG");
+    animationData["fps"] = a.fps;
+    for (auto frame : a.frames)
+    {
+        QJsonObject frameObj;
+        QJsonArray layers;
+        frameObj["frameID"] = frame->frameID;
+        frameObj["layers"] = layers;
+        //frames.append(frameObj);
+        //for (auto pixel : )
 
-    QString base64Image = QString::fromLatin1(byteArray.toBase64().data());
+        for (auto layer : frame->images)
+        {
+            QJsonObject image;
+            image["layerID"] = count;
+            QJsonArray pixels;
+            //image["pixels"] = pixels;
+            //pixels = layer->pixels;
+            //frames.pixels;
+            for (int height = 0; height < layer.height(); height++){
+                QRgb *row = (QRgb*) layer.scanLine(height);
+                for (int width = 0; width < layer.width(); width++){
+                    QJsonObject pixel;
+                    QColor color(row[width]);
+                    pixel["red"] = color.red();
+                    pixel["green"] = color.green();
+                    pixel["blue"] = color.blue();
+                    pixel["alpha"] = color.alpha();
 
-    json["image"] = base64Image;
+                    //pixel.insert("RGB value: " , row[width].toObject());
+                    //pixel["rgbValue"] = pixel;
+                    pixels.append(pixel);
+                }
+            }
+            image.insert("pixels", pixels);
+            layers.append(image);
+            count++;
+        }
+        frameObj.insert("layers", layers);
 
-    qDebug() << json;
+        frames.append(frameObj);
+    }
+    animationData.insert("frames", frames);
 
-    QJsonDocument doc(json);
-    QByteArray data = doc.toJson(QJsonDocument::Indented);
-    qDebug() << "serialized: " << data;
+    QJsonDocument docTest(animationData);
+    QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
+    qDebug() << "serialized: " << dataTest;
 
-    QFile file(QString("testJson.json"));
+    QFile fileTest(QString("testBasic2.json"));
 
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-        out << data;
-        file.close();
+    if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&fileTest);
+        out << dataTest;
+        fileTest.close();
         qDebug() << "written";
     }
 
-    QFile file2(QString("testJson.json"));
-    file2.open(QIODevice::ReadOnly | QIODevice::Text);
-    QByteArray imagejsonData = file2.readAll();
-    file2.close();
-    QJsonDocument doc2 = QJsonDocument::fromJson(imagejsonData);
-    QJsonObject jsonImage = doc2.object();
-    QString baseImage = jsonImage["image"].toString();
-    QByteArray imageData = QByteArray::fromBase64(baseImage.toLatin1());
-    QImage testImage;
-    testImage.loadFromData(imageData);
 
-    testImage.save("testImage.png", "PNG");
+
+
+
+
+
+
+
+
+
+
+
+    //old code
+    // QJsonObject json;
+
+    // QByteArray byteArray;
+    // QBuffer buffer(&byteArray);
+    // buffer.open(QIODevice::WriteOnly);
+    // f.getCurrentLayer().save(&buffer, "PNG");
+
+    // QString base64Image = QString::fromLatin1(byteArray.toBase64().data());
+
+    // json["image"] = base64Image;
+
+    // qDebug() << json;
+
+    // QJsonDocument doc(json);
+    // QByteArray data = doc.toJson(QJsonDocument::Indented);
+    // qDebug() << "serialized: " << data;
+
+    // QFile file(QString("testJson.json"));
+
+    // if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    //     QTextStream out(&file);
+    //     out << data;
+    //     file.close();
+    //     qDebug() << "written";
+    // }
+
+    // QFile file2(QString("testJson.json"));
+    // file2.open(QIODevice::ReadOnly | QIODevice::Text);
+    // QByteArray imagejsonData = file2.readAll();
+    // file2.close();
+    // QJsonDocument doc2 = QJsonDocument::fromJson(imagejsonData);
+    // QJsonObject jsonImage = doc2.object();
+    // QString baseImage = jsonImage["image"].toString();
+    // QByteArray imageData = QByteArray::fromBase64(baseImage.toLatin1());
+    // QImage testImage;
+    // testImage.loadFromData(imageData);
+
+    // testImage.save("testImage.png", "PNG");
 }
 
 void model::circlePressed()
