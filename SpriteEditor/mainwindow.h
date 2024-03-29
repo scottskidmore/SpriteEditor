@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "model.h"
-#include "canvas.h"
 #include <QColorDialog>
 
 QT_BEGIN_NAMESPACE

@@ -103,17 +103,17 @@ MainWindow::MainWindow(model *m, QWidget *parent)
 
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
-                     &m->f,
+                     m->f,
                      &Frame::updateImageSize16);
 
     QObject::connect(ui->size32,
                      &QPushButton::clicked,
-                     &m->f,
+                     m->f,
                      &Frame::updateImageSize32);
 
     QObject::connect(ui->size64,
                      &QPushButton::clicked,
-                     &m->f,
+                     m->f,
                      &Frame::updateImageSize64);
 
 

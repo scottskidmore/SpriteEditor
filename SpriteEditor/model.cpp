@@ -104,6 +104,10 @@ void model::savePressed()
     }
     animationData.insert("frames", frames);
 
+    QJsonDocument docTest(animationData);
+    QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
+    qDebug() << "serialized: " << dataTest;
+
     QFile fileTest(QString("testBasic2.json"));
 
     if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -177,23 +181,23 @@ void model::squarePressed()
 }
 
 void model::layer1(){
-    this->f.setCurrentLayer(0);
+    this->f->setCurrentLayer(0);
 }
 
 void model::layer2(){
-    this->f.setCurrentLayer(1);
+    this->f->setCurrentLayer(1);
 }
 
 void model::layer3(){
-    this->f.setCurrentLayer(2);
+    this->f->setCurrentLayer(2);
 }
 
 void model::layer4(){
-    this->f.setCurrentLayer(3);
+    this->f->setCurrentLayer(3);
 }
 
 void model::layer5(){
-    this->f.setCurrentLayer(4);
+    this->f->setCurrentLayer(4);
 }
 
 void model::addFrame()
