@@ -32,6 +32,7 @@ private:
 signals:
     void frameButtonAdded();
     void frameButtonRemoved();
+    void createNewSprite();
 
 public slots:
     //void onGridClicked(QPoint);
@@ -42,5 +43,6 @@ public slots:
     void connectNewFrame();
     void onRemoveFrame();
     void animate();
+    void onNewButtonPressed();
 };
 #endif // MAINWINDOW_H

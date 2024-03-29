@@ -165,6 +165,15 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &QTimer::timeout,
                      this,
                      &MainWindow::animate);
+    QObject::connect(ui->actionNew,
+                     &QAction::triggered,
+                     this,
+                     &MainWindow::onNewButtonPressed);
+
+    QObject::connect(this,
+                     &MainWindow::createNewSprite,
+                     m,
+                     &model::clearAll);
 
     m->setDrawLayer();
     this->m = m;
@@ -246,6 +255,21 @@ void MainWindow::animate(){
         currentFrame++;
         timer.start(200);
     }
+void MainWindow::onNewButtonPressed()
+{
+    QObjectList children = ui->scrollAreaContents->children();
+    int index = children.size() - 1;
+    while (index > 1) {
+        QPushButton *c = qobject_cast<QPushButton*>(children[index]);
+        ui->scrollFrameBox->removeWidget(c);
+        delete c;
+        QObject::disconnect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
+        QObject::disconnect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
+        ui->scrollFrameBox->update();
+        index--;
+    }
+    emit createNewSprite();
+    ui->canvas->update();
 }
 
 

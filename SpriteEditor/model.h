@@ -52,6 +52,7 @@ public slots:
     void layer3();
     void layer4();
     void layer5();
+    void clearAll();
 };
 
 #endif // MODEL_H
