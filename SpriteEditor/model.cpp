@@ -43,10 +43,23 @@ void model::editImage(QPoint p)
         pen.drawPixel(p);
     else if (currentTool == Eraser)
         pen.eraseTool(p);
-    else if (currentTool == Circle)
-        pen.drawCircle(p, 5);
-    else if (currentTool == Square)
-        pen.drawSquare(p, 5);
+
+    f->sendImages();
+    getFrameImages();
+}
+
+void model::handleDrawingShapes(QPoint startPoint, QPoint endPoint) {
+    // Determine the size of the shape to be drawn
+    int width = abs(endPoint.x() - startPoint.x());
+    int height = abs(endPoint.y() - startPoint.y());
+    int size = qMax(width, height);
+
+    if (currentTool == Circle){
+        pen.drawCircle(startPoint, size);
+    }
+    else if (currentTool == Square){
+        pen.drawSquare(startPoint, size);
+    }
 
     f->sendImages();
     getFrameImages();

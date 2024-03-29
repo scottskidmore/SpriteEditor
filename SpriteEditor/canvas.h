@@ -27,10 +27,13 @@ private:
     int gridSize;
     bool trackMouse;
     int cellSize;
+    QPoint startPoint;
+    QPoint endPoint;
 
 
 signals:
     void gridClicked(QPoint);
+    void drawingAction(QPoint startPoint, QPoint endPoint);
 public slots:
     void updateCanvas(std::vector<QImage>);
     void updateGridSize16();

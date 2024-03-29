@@ -69,13 +69,22 @@ void Canvas::mousePressEvent(QMouseEvent *event)
     int y = event->pos().y() / cellSize;
     emit gridClicked(QPoint(x, y));
     QWidget::update();
+    startPoint = (QPoint(x, y));
     trackMouse = true;
 }
 
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
     qDebug() << "Mouse released: " << event->pos();
-    trackMouse = false;
+    if (trackMouse) {
+        int x = event->pos().x() / cellSize;
+        int y = event->pos().y() / cellSize;
+        endPoint = (QPoint(x, y));
+        emit drawingAction(startPoint, endPoint);
+        trackMouse = false;  // Stop tracking the mouse
+    }
+
+    update();
 
 }
 

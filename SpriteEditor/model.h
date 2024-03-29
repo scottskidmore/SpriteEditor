@@ -37,6 +37,7 @@ signals:
 
 public slots:
     void editImage(QPoint);
+    void handleDrawingShapes(QPoint, QPoint);
     void erasePressed();
     void drawPressed();
     void savePressed();

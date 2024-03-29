@@ -33,6 +33,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::circlePressed);
 
+    QObject::connect(ui->canvas,
+                     &Canvas::drawingAction,
+                     m,
+                     &model::handleDrawingShapes);
 
     QObject::connect(ui->actionErase,
             &QAction::triggered,
