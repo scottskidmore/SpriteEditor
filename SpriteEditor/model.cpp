@@ -6,13 +6,27 @@ model::model(QObject *parent)
     : QObject{parent}
 {
     //currentTool = 'd';
+
     currentTool = Pen;
-    f.frameID = 0;
+    f = new Frame();
+    f->frameID = 0;
+    a.addFrame(f);
+    //QObject::connect(f, &Frame::changeFrame, this, &model::switchFrame);
 }
 
 void model::setDrawLayer()
 {
-    pen.setImage(f.getCurrentLayer());
+    pen.setImage(f->getCurrentLayer());
+}
+
+void model::getFrameImages()
+{
+    std::vector<QImage> imageList;
+    for(int i = 0; i < (int)a.frames.size(); i++) {
+        imageList.push_back(a.frames[i]->images[0]);
+    }
+
+    emit updateFrameDisplay(imageList);
 }
 
 void model::editImage(QPoint p)
@@ -27,7 +41,8 @@ void model::editImage(QPoint p)
     else if (currentTool == Square)
         pen.drawSquare(p, 5);
 
-    f.sendImages();
+    f->sendImages();
+    getFrameImages();
 }
 
 void model::erasePressed()
@@ -88,10 +103,6 @@ void model::savePressed()
         frames.append(frameObj);
     }
     animationData.insert("frames", frames);
-
-    QJsonDocument docTest(animationData);
-    QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
-    qDebug() << "serialized: " << dataTest;
 
     QFile fileTest(QString("testBasic2.json"));
 
@@ -183,5 +194,34 @@ void model::layer4(){
 
 void model::layer5(){
     this->f.setCurrentLayer(4);
+}
+
+void model::addFrame()
+{
+    Frame* newF = new Frame();
+    newF->frameID = (int)a.frames.size();
+    a.addFrame(newF);
+    switchFrame(newF->frameID);
+    emit connectFrameButton();
+}
+
+void model::switchFrame(int id)
+{
+    this->f = a.frames[id];
+    setDrawLayer();
+    emit connectFrameUpdate();
+    f->sendImages();
+    getFrameImages();
+}
+
+void model::deleteFrame()
+{
+    if (a.frames.size() > 1)
+    {
+        a.frames.pop_back();
+    }
+    switchFrame(a.frames[a.frames.size() - 1]->frameID);
+    getFrameImages();
+    qDebug() << a.frames.size();
 }
 

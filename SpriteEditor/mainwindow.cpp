@@ -13,7 +13,7 @@ MainWindow::MainWindow(model *m, QWidget *parent)
             m,
             &model::editImage);
 
-    QObject::connect(&m->f,
+    QObject::connect(m->f,
             &Frame::updateImage,
             ui->canvas,
             &Canvas::updateCanvas);
@@ -50,8 +50,8 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::chooseColor);
 
-    QObject::connect(&m->f,
-                     &Frame::updateImage,
+    QObject::connect(m,
+                     &model::updateFrameDisplay,
                      this,
                      &MainWindow::updateFrameDisplay);
 
@@ -117,6 +117,39 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &Frame::updateImageSize64);
 
 
+    QObject::connect(ui->frame0,
+                     &QPushButton::clicked,
+                     m->f,
+                     &Frame::frameButtonPressed);
+
+    QObject::connect(m->f,
+                     &Frame::changeFrame,
+                     m,
+                     &model::switchFrame);
+
+    QObject::connect(this,
+                     &MainWindow::frameButtonAdded,
+                     m,
+                     &model::addFrame);
+
+    QObject::connect(m,
+                     &model::connectFrameButton,
+                     this,
+                     &MainWindow::connectButtonFrame);
+
+    QObject::connect(m,
+                     &model::connectFrameUpdate,
+                     this,
+                     &MainWindow::connectNewFrame);
+
+    QObject::connect(ui->removeFrameButton,
+                     &QPushButton::clicked,
+                     this,
+                     &MainWindow::onRemoveFrame);
+    QObject::connect(this,
+                     &MainWindow::frameButtonRemoved,
+                     m,
+                     &model::deleteFrame);
 
     m->setDrawLayer();
     this->m = m;
@@ -138,6 +171,7 @@ void MainWindow::onAddFrame()
     button->setMinimumSize(64, 64);
     button->setGeometry(75, 10, 64, 64);
     ui->scrollFrameBox->addWidget(button);
+    emit frameButtonAdded();
 }
 
 void MainWindow::updateFrameDisplay(std::vector<QImage> images)
@@ -152,6 +186,38 @@ void MainWindow::updateFrameDisplay(std::vector<QImage> images)
         c->setIconSize(m.rect().size());
     }
 }
+
+void MainWindow::connectButtonFrame()
+{
+    QObject::connect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
+    QObject::connect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
+}
+
+void MainWindow::connectNewFrame()
+{
+    QObject::connect(m->f,
+                     &Frame::updateImage,
+                     ui->canvas,
+                     &Canvas::updateCanvas);
+    ui->canvas->update();
+}
+
+void MainWindow::onRemoveFrame()
+{
+    QObjectList children = ui->scrollAreaContents->children();
+    int index = children.size() - 1;
+    if (index > 1) {
+        QPushButton *c = qobject_cast<QPushButton*>(children[index]);
+        ui->scrollFrameBox->removeWidget(c);
+        delete c;
+        QObject::disconnect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
+        QObject::disconnect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
+        ui->scrollFrameBox->update();
+        emit frameButtonRemoved();
+    }
+    ui->canvas->update();
+}
+
 
 MainWindow::~MainWindow()
 {

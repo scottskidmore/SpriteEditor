@@ -28,6 +28,11 @@ void Frame::sendImages()
     emit updateImage(images);
 }
 
+void Frame::frameButtonPressed()
+{
+    emit changeFrame(this->frameID);
+}
+
 void Frame::updateImageSize16(){
     images.clear();
     QImage newImage(16, 16, QImage::Format_ARGB32);

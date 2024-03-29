@@ -13,7 +13,7 @@ void Animation::addFrame(Frame *frame)
 
 void Animation::deleteFrame(Frame *frame)
 {
-
+    frames.pop_back();
 }
 
 void Animation::setfps(int)
@@ -21,15 +21,6 @@ void Animation::setfps(int)
 
 }
 
-void Animation::loadFile(std::string file)
-{
-
-}
-
-void Animation::saveFile(std::string file)
-{
-
-}
 void Animation::setImage()
 {
     Frame* f = frames.at(currentFrame);
