@@ -35,6 +35,7 @@ signals:
     void connectFrameUpdate();
     void updateFrameDisplay(std::vector<QImage> images);
 
+
 public slots:
     void editImage(QPoint);
     void handleDrawingShapes(QPoint, QPoint);

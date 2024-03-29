@@ -65,7 +65,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="Animation" name="label">
+   <widget class="QLabel" name="animation">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -102,7 +102,7 @@
        <x>0</x>
        <y>0</y>
        <width>359</width>
-       <height>88</height>
+       <height>89</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -291,7 +291,7 @@
      <x>0</x>
      <y>0</y>
      <width>1286</width>
-     <height>26</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>
@@ -474,11 +474,6 @@
    <class>Canvas</class>
    <extends>QLabel</extends>
    <header>canvas.h</header>
-  </customwidget>
-  <customwidget>
-   <class>Animation</class>
-   <extends>QLabel</extends>
-   <header>animation.h</header>
   </customwidget>
  </customwidgets>
  <resources>
