@@ -245,8 +245,10 @@ void MainWindow::onRemoveFrame()
 void MainWindow::storeFrames(std::vector<QImage> images){
     frames=images;
 }
+
 void MainWindow::animate(){
     if((int)frames.size()==0){
+
     }else{
         if(currentFrame>(int)frames.size()-1){
             currentFrame=0;
@@ -255,6 +257,8 @@ void MainWindow::animate(){
         currentFrame++;
         timer.start(200);
     }
+}
+
 void MainWindow::onNewButtonPressed()
 {
     QObjectList children = ui->scrollAreaContents->children();
