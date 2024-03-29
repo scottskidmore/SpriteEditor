@@ -246,7 +246,8 @@ void MainWindow::onNewButtonPressed()
         index--;
     }
     emit createNewSprite();
-    ui->canvas->update();
+    ui->canvas->updateGridSize32();
+
 }
 
 
