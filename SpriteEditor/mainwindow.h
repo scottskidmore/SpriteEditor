@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "model.h"
+#include "qtimer.h"
 #include <QColorDialog>
 
 QT_BEGIN_NAMESPACE
@@ -19,10 +20,14 @@ public:
     MainWindow(model*, QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private:
+    QTimer timer;
     Ui::MainWindow *ui;
     model* m;
     void chooseColor();
+    int currentFrame=0;
+    std::vector<QImage> frames;
 
 signals:
     void frameButtonAdded();
@@ -33,9 +38,11 @@ public slots:
     //void onGridClicked(QPoint);
     void onAddFrame();
     void updateFrameDisplay(std::vector<QImage> images);
+    void storeFrames(std::vector<QImage> images);
     void connectButtonFrame();
     void connectNewFrame();
     void onRemoveFrame();
+    void animate();
     void onNewButtonPressed();
 };
 #endif // MAINWINDOW_H

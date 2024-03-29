@@ -8,6 +8,7 @@ MainWindow::MainWindow(model *m, QWidget *parent)
 {
     ui->setupUi(this);
     ui->canvas->setGridSize(32);
+    timer.start(200);
     QObject::connect(ui->canvas,
             &Canvas::gridClicked,
             m,
@@ -58,6 +59,11 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &model::updateFrameDisplay,
                      this,
                      &MainWindow::updateFrameDisplay);
+
+    QObject::connect(m,
+                     &model::updateFrameDisplay,
+                     this,
+                     &MainWindow::storeFrames);
 
     QObject::connect(ui->layer1,
                      &QPushButton::clicked,
@@ -155,6 +161,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::deleteFrame);
 
+    QObject::connect(&timer,
+                     &QTimer::timeout,
+                     this,
+                     &MainWindow::animate);
     QObject::connect(ui->actionNew,
                      &QAction::triggered,
                      this,
@@ -232,6 +242,19 @@ void MainWindow::onRemoveFrame()
     ui->canvas->update();
 }
 
+void MainWindow::storeFrames(std::vector<QImage> images){
+    frames=images;
+}
+void MainWindow::animate(){
+    if((int)frames.size()==0){
+    }else{
+        if(currentFrame>(int)frames.size()-1){
+            currentFrame=0;
+        }
+        ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame)));
+        currentFrame++;
+        timer.start(200);
+    }
 void MainWindow::onNewButtonPressed()
 {
     QObjectList children = ui->scrollAreaContents->children();
