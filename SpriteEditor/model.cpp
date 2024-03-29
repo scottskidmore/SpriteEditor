@@ -220,6 +220,18 @@ void model::layer5(){
     this->f->setCurrentLayer(4);
 }
 
+void model::clearAll()
+{
+    a.frames.clear();
+    this->f = new Frame();
+    f->frameID = 0;
+    a.addFrame(f);
+    setDrawLayer();
+    emit connectFrameUpdate();
+    f->sendImages();
+    getFrameImages();
+}
+
 void model::addFrame()
 {
     Frame* newF = new Frame();
