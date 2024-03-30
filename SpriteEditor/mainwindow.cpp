@@ -50,10 +50,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::savePressed);
 
-    // QObject::connect(ui->actionLoad,
-    //                  &QAction::triggered,
-    //                  m,
-    //                  &model::loadPressed);
+    QObject::connect(ui->actionLoad,
+                     &QAction::triggered,
+                     m,
+                     &model::loadPressed);
 
     QObject::connect(ui->actionLoad,
                      &QAction::triggered,

@@ -125,7 +125,7 @@ void model::savePressed()
 
     QJsonDocument docTest(animationData);
     QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
-    qDebug() << "serialized: " << dataTest;
+    //qDebug() << "serialized: " << dataTest;
 
     QFile fileTest(QString("testBasic2.json"));
 
@@ -133,7 +133,7 @@ void model::savePressed()
         QTextStream out(&fileTest);
         out << dataTest;
         fileTest.close();
-        qDebug() << "written";
+        //qDebug() << "written";
     }
 
 
@@ -193,6 +193,81 @@ void model::loadPressed()
 {
     // QFileDialog dialog(this);
     // dialog.setFileMode(QFileDialog::AnyFile);
+
+    QFile file("testBasic2.json");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "Failed to open file for reading";
+        return;
+    }
+    QByteArray jsonData = file.readAll();
+    file.close();
+
+    QJsonParseError jsonError;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &jsonError);
+    if (jsonError.error != QJsonParseError::NoError) {
+        qDebug() << "Failed to parse JSON:" << jsonError.errorString();
+        return;
+    }
+
+
+
+    // QJsonParseError err;
+    // QJsonDocument doc = QJsonDocument::fromJson(jsonData, &err);
+
+    // if(err.error != QJsonParseError::NoError)
+    // {
+    //     return; //-1; // Failure
+    // }
+
+    QJsonObject animation = jsonDoc.object();
+    QJsonArray framesArray = animation.value("frames").toArray();
+
+    for(int i = 0; i < framesArray.size(); ++i)
+    {
+        QJsonObject obj = framesArray[i].toObject();
+        QJsonArray layersArray = obj.value("layers").toArray();
+
+        Frame* newF = new Frame();
+        newF->frameID = (int)a.frames.size();
+        // a.addFrame(newF);
+        // switchFrame(newF->frameID);
+        // emit connectFrameButton();
+
+        for(int j = 0; j < layersArray.size(); ++j)
+        {
+            QJsonObject layerObj = layersArray[j].toObject();
+            QJsonArray pixelsArray = layerObj.value("pixels").toArray();
+
+            for(int k = 0; k < pixelsArray.size(); ++k)
+            {
+                int width = 32;
+                int x = k % width;
+                int y = k / width;
+                QPoint point(x, y);
+
+                QJsonObject pixelObj = pixelsArray[k].toObject();
+                int red = pixelObj["red"].toInt();
+                int green = pixelObj["green"].toInt();
+                int blue = pixelObj["blue"].toInt();
+                int alpha = pixelObj["alpha"].toInt();
+
+                QColor color(red, green, blue, alpha);
+                newF->images[j].setPixelColor(point, color);
+
+            }
+            //a.frames[i] =
+        }
+        if (i == 0)
+        {
+            a.frames[0] = newF;
+        }
+        else
+        {
+            a.addFrame(newF);
+            switchFrame(newF->frameID);
+            emit connectFrameButton();
+        }
+    }
 }
 
 void model::circlePressed()
