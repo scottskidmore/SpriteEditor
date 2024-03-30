@@ -39,6 +39,7 @@ public slots:
     void updateGridSize16();
     void updateGridSize32();
     void updateGridSize64();
+    void loadPressed();
 };
 
 #endif // CANVAS_H

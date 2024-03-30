@@ -1,5 +1,4 @@
 #include "model.h"
-
 //model::model() {}
 
 model::model(QObject *parent)
@@ -190,6 +189,12 @@ void model::savePressed()
     // testImage.save("testImage.png", "PNG");
 }
 
+void model::loadPressed()
+{
+    // QFileDialog dialog(this);
+    // dialog.setFileMode(QFileDialog::AnyFile);
+}
+
 void model::circlePressed()
 {
     currentTool = Circle;
@@ -259,5 +264,25 @@ void model::deleteFrame()
     switchFrame(a.frames[a.frames.size() - 1]->frameID);
     getFrameImages();
     qDebug() << a.frames.size();
+}
+
+void model::updateAllFrameSizes(){
+    QObject *senderObject = QObject::sender();
+    if (senderObject->objectName() == "size16"){
+        for (auto frame : a.frames){
+            frame->updateImageSize16();
+        }
+    }
+    else if (senderObject->objectName() == "size32"){
+        for (auto frame : a.frames){
+            frame->updateImageSize32();
+        }
+    }
+    else if (senderObject->objectName() == "size64"){
+        for (auto frame : a.frames){
+            frame->updateImageSize64();
+        }
+    }
+    getFrameImages();
 }
 

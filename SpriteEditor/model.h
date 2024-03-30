@@ -42,6 +42,7 @@ public slots:
     void erasePressed();
     void drawPressed();
     void savePressed();
+    void loadPressed();
     void addFrame();
     void switchFrame(int id);
     void deleteFrame();
@@ -53,6 +54,7 @@ public slots:
     void layer4();
     void layer5();
     void clearAll();
+    void updateAllFrameSizes();
 };
 
 #endif // MODEL_H

@@ -1,6 +1,7 @@
 #include "canvas.h"
 #include <QDebug>
 #include <QImageWriter>
+#include <QFileDialog>
 
 Canvas::Canvas(QWidget *parent)
     : QLabel{parent}
@@ -108,5 +109,17 @@ void Canvas::updateGridSize32(){
 void Canvas::updateGridSize64(){
 
     setGridSize(64);
+    QWidget::update();
+}
+
+void Canvas::loadPressed()
+{
+    qDebug() << "Load pressed!!!!!!";
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setViewMode(QFileDialog::Detail);
+    QStringList fileNames;
+    if (dialog.exec())
+        fileNames = dialog.selectedFiles();
     QWidget::update();
 }

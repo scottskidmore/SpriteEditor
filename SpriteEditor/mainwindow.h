@@ -44,5 +44,6 @@ public slots:
     void onRemoveFrame();
     void animate();
     void onNewButtonPressed();
+    void loadPressed();
 };
 #endif // MAINWINDOW_H

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "canvas.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(model *m, QWidget *parent)
     : QMainWindow(parent)
@@ -49,6 +50,15 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::savePressed);
 
+    // QObject::connect(ui->actionLoad,
+    //                  &QAction::triggered,
+    //                  m,
+    //                  &model::loadPressed);
+
+    QObject::connect(ui->actionLoad,
+                     &QAction::triggered,
+                     this,
+                     &MainWindow::loadPressed);
 
     QObject::connect(ui->chooseColor,
                      &QPushButton::clicked,
@@ -113,18 +123,18 @@ MainWindow::MainWindow(model *m, QWidget *parent)
 
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
-                     m->f,
-                     &Frame::updateImageSize16);
+                     m,
+                     &model::updateAllFrameSizes);
 
     QObject::connect(ui->size32,
                      &QPushButton::clicked,
-                     m->f,
-                     &Frame::updateImageSize32);
+                     m,
+                     &model::updateAllFrameSizes);
 
     QObject::connect(ui->size64,
                      &QPushButton::clicked,
-                     m->f,
-                     &Frame::updateImageSize64);
+                     m,
+                     &model::updateAllFrameSizes);
 
 
     QObject::connect(ui->frame0,
@@ -275,6 +285,18 @@ void MainWindow::onNewButtonPressed()
     emit createNewSprite();
     ui->canvas->updateGridSize32();
 
+}
+
+void MainWindow::loadPressed()
+{
+    //qDebug() << "Load pressed!!!!!!";
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setViewMode(QFileDialog::Detail);
+    QStringList fileNames;
+    if (dialog.exec())
+        fileNames = dialog.selectedFiles();
+    QWidget::update();
 }
 
 
