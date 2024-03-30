@@ -185,6 +185,11 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::clearAll);
 
+    QObject::connect(ui->frameRateSlider,
+                     &QSlider::sliderMoved,
+                     m,
+                     &model::updateFrameRate);
+
     m->setDrawLayer();
     this->m = m;
 }

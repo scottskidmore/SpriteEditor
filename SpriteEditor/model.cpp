@@ -286,3 +286,8 @@ void model::updateAllFrameSizes(){
     getFrameImages();
 }
 
+void model::updateFrameRate(int rate)
+{
+    a.setfps(rate);
+}
+

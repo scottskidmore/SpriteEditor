@@ -16,9 +16,9 @@ void Animation::deleteFrame(Frame *frame)
     frames.pop_back();
 }
 
-void Animation::setfps(int)
+void Animation::setfps(int rate)
 {
-
+    fps = rate;
 }
 
 void Animation::setImage()

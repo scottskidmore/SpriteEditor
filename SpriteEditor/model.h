@@ -55,6 +55,7 @@ public slots:
     void layer5();
     void clearAll();
     void updateAllFrameSizes();
+    void updateFrameRate(int);
 };
 
 #endif // MODEL_H
