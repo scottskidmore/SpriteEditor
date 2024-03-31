@@ -199,6 +199,17 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::updateFrameRate);
 
+    QObject::connect(ui->actionHelp,
+                     &QAction::triggered,
+                     this,
+                     &MainWindow::helpClicked);
+
+    QObject::connect(m,
+                     &model::swapLayerText,
+                     this,
+                     &MainWindow::changeUsingLayerText);
+
+
     m->setDrawLayer();
     this->m = m;
 }
@@ -315,6 +326,34 @@ void MainWindow::loadPressed()
 void MainWindow::updateFps(int i)
 {
     frameTime=82-i;
+}
+
+void MainWindow::helpClicked()
+{
+    QString tips = "Here are some useful tips/notes about our sprite editor:\n\n"
+                   "When changing the sprite size, it will clear the images on all frames/layers.\n"
+                   "When removing a frame it will only remove the most recently added frame. And it will never remove the first frame.\n\n"
+                   "Keyboard Shortcuts:\n"
+                   "Draw: Ctrl+D\n"
+                   "Erase: Ctrl+E\n"
+                   "Spray Paint: Ctrl+Shift+D\n"
+                   "Save: Ctrl+S\n"
+                   "New: Ctrl+N\n"
+                   "Load: Ctrl+L\n"
+                   "Help: Ctrl+H\n"
+                   "draw Circle: Ctrl+C\n"
+                   "draw Square: Ctrl+R";
+
+    QMessageBox helpBox;
+    helpBox.setWindowTitle("Help");
+    helpBox.setText(tips);
+    helpBox.addButton(QMessageBox::Ok);
+    helpBox.exec();
+}
+
+void MainWindow::changeUsingLayerText(QString text)
+{
+    ui->whichLayer->setText(text);
 }
 
 

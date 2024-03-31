@@ -74,4 +74,5 @@ void Frame::updateImageSize64(){
 }
  void Frame::setCurrentLayer(int i){
     currentImage=i;
+
 }

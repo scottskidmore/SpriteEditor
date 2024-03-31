@@ -17,6 +17,7 @@ model::model(QObject *parent)
 void model::setDrawLayer()
 {
     pen.setImage(f->getCurrentLayer());
+    emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
 void model::getFrameImages()
@@ -309,22 +310,27 @@ void model::sprayCanPressed()
 
 void model::layer1(){
     this->f->setCurrentLayer(0);
+    emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
 void model::layer2(){
     this->f->setCurrentLayer(1);
+    emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
 void model::layer3(){
     this->f->setCurrentLayer(2);
+    emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
 void model::layer4(){
     this->f->setCurrentLayer(3);
+    emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
 void model::layer5(){
     this->f->setCurrentLayer(4);
+    emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
 void model::clearAll()

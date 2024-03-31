@@ -35,6 +35,7 @@ signals:
     void connectFrameButton();
     void connectFrameUpdate();
     void updateFrameDisplay(std::vector<QImage> images);
+    void swapLayerText(QString text);
 
 
 public slots:

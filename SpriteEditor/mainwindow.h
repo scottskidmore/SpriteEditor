@@ -5,6 +5,7 @@
 #include "model.h"
 #include "qtimer.h"
 #include <QColorDialog>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -47,5 +48,7 @@ public slots:
     void onNewButtonPressed();
     void loadPressed();
     void updateFps(int i);
+    void helpClicked();
+    void changeUsingLayerText(QString text);
 };
 #endif // MAINWINDOW_H
