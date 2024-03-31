@@ -16,6 +16,7 @@ public:
     void deleteFrame(Frame* frame);
     void setfps(int);
     void setImage();
+    QStringList file;
     
 private:
     int currentFrame=0;

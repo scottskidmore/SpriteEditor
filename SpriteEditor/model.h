@@ -22,6 +22,7 @@ public:
     Animation a;
     Frame* f;
     void setDrawLayer();
+    void loadPressed(QString file);
 
 
 private:
@@ -42,7 +43,6 @@ public slots:
     void erasePressed();
     void drawPressed();
     void savePressed();
-    void loadPressed();
     void addFrame();
     void switchFrame(int id);
     void deleteFrame();

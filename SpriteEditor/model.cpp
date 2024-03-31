@@ -1,4 +1,5 @@
 #include "model.h"
+#include <QFileDialog>
 //model::model() {}
 
 model::model(QObject *parent)
@@ -196,12 +197,9 @@ void model::savePressed()
     // testImage.save("testImage.png", "PNG");
 }
 
-void model::loadPressed()
+void model::loadPressed(QString fileName)
 {
-    // QFileDialog dialog(this);
-    // dialog.setFileMode(QFileDialog::AnyFile);
-
-    QFile file("testBasic2.json");
+    QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Failed to open file for reading";
         return;

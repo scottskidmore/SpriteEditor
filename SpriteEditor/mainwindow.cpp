@@ -50,10 +50,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::savePressed);
 
-    QObject::connect(ui->actionLoad,
-                     &QAction::triggered,
-                     m,
-                     &model::loadPressed);
+    // QObject::connect(ui->actionLoad,
+    //                  &QAction::triggered,
+    //                  m,
+    //                  &model::loadPressed);
 
     QObject::connect(ui->actionLoad,
                      &QAction::triggered,
@@ -295,13 +295,12 @@ void MainWindow::onNewButtonPressed()
 void MainWindow::loadPressed()
 {
     //qDebug() << "Load pressed!!!!!!";
-    QFileDialog dialog(this);
-    dialog.setFileMode(QFileDialog::AnyFile);
-    dialog.setViewMode(QFileDialog::Detail);
-    QStringList fileNames;
-    if (dialog.exec())
-        fileNames = dialog.selectedFiles();
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    "/home",
+                                                    tr("Sprite Animations (*.json)"));
+    m->loadPressed(fileName);
     QWidget::update();
+
 }
 
 
