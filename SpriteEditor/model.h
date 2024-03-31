@@ -27,7 +27,7 @@ public:
 
 private:
     //char currentTool;
-    enum tools {Pen, Eraser, Square, Circle};
+    enum tools {Pen, Eraser, Square, Circle, SprayCan};
     tools currentTool;
     void getFrameImages();
 
@@ -48,6 +48,7 @@ public slots:
     void deleteFrame();
     void circlePressed();
     void squarePressed();
+    void sprayCanPressed();
     void layer1();
     void layer2();
     void layer3();

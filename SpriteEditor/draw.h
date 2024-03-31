@@ -2,6 +2,7 @@
 #define DRAW_H
 
 #include <QPainter>
+#include <QRandomGenerator>
 #include "qobject.h"
 
 class Draw : public QObject
@@ -16,11 +17,11 @@ public:
     void drawSquare(QPoint, int);
     void drawCircle(QPoint, int);
     void drawTraingle(QPoint, int);
-    void drawSpray(QPoint, int);
     //void drawPixel(QPoint);
     void setImage(QImage&);
     void eraseTool(QPoint);
     QImage getImage();
+    void sprayPaint(QPoint, int, int);
 
 private:
     QColor color;

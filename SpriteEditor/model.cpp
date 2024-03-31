@@ -43,6 +43,8 @@ void model::editImage(QPoint p)
         pen.drawPixel(p);
     else if (currentTool == Eraser)
         pen.eraseTool(p);
+    else if (currentTool == SprayCan)
+        pen.sprayPaint(p, 6, 1);
 
     f->sendImages();
     getFrameImages();
@@ -298,6 +300,11 @@ void model::circlePressed()
 void model::squarePressed()
 {
     currentTool = Square;
+}
+
+void model::sprayCanPressed()
+{
+    currentTool = SprayCan;
 }
 
 void model::layer1(){

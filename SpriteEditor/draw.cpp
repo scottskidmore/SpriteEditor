@@ -42,10 +42,23 @@ void Draw::drawCircle(QPoint p, int diameter)
     painter.drawEllipse(p.x(), p.y(), diameter, diameter);
 }
 
-void Draw::drawSpray(QPoint, int)
+void Draw::sprayPaint(QPoint center, int radius, int density)
 {
+    QPainter painter(this->image);
+    painter.setPen(color);
 
+    int pointsToDraw = radius * density;
+
+    for (int i = 0; i < pointsToDraw; ++i) {
+        int dx = QRandomGenerator::global()->bounded(-radius, radius);
+        int dy = QRandomGenerator::global()->bounded(-radius, radius);
+
+        if (dx * dx + dy * dy <= radius * radius) {
+            painter.drawPoint(center.x() + dx, center.y() + dy);
+        }
+    }
 }
+
 
 void Draw::drawPixel(QPoint point)
 {

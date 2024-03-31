@@ -34,6 +34,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &QAction::triggered,
                      m,
                      &model::circlePressed);
+    QObject::connect(ui->actionSpray_Paint,
+                     &QAction::triggered,
+                     m,
+                     &model::sprayCanPressed);
 
     QObject::connect(ui->canvas,
                      &Canvas::drawingAction,
