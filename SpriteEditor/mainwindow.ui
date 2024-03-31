@@ -68,10 +68,10 @@
    <widget class="QLabel" name="animation">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>90</y>
-      <width>111</width>
-      <height>71</height>
+      <x>70</x>
+      <y>30</y>
+      <width>181</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="text">
@@ -102,7 +102,7 @@
        <x>0</x>
        <y>0</y>
        <width>359</width>
-       <height>84</height>
+       <height>89</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -308,6 +308,9 @@
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
+    <property name="invertedAppearance">
+     <bool>false</bool>
+    </property>
     <property name="tickPosition">
      <enum>QSlider::TicksBothSides</enum>
     </property>
@@ -318,7 +321,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>120</x>
       <y>190</y>
       <width>71</width>
       <height>16</height>
@@ -328,6 +331,32 @@
      <string>Frame Rate</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>230</y>
+      <width>37</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>15</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>230</y>
+      <width>37</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>60</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -335,7 +364,7 @@
      <x>0</x>
      <y>0</y>
      <width>1286</width>
-     <height>22</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>

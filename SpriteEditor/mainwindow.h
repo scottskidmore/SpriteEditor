@@ -28,6 +28,7 @@ private:
     void chooseColor();
     int currentFrame=0;
     std::vector<QImage> frames;
+    int frameTime=67;
 
 signals:
     void frameButtonAdded();
@@ -45,5 +46,6 @@ public slots:
     void animate();
     void onNewButtonPressed();
     void loadPressed();
+    void updateFps(int i);
 };
 #endif // MAINWINDOW_H

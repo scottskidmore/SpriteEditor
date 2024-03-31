@@ -9,7 +9,7 @@ MainWindow::MainWindow(model *m, QWidget *parent)
 {
     ui->setupUi(this);
     ui->canvas->setGridSize(32);
-    timer.start(200);
+    timer.start(5);
     QObject::connect(ui->canvas,
             &Canvas::gridClicked,
             m,
@@ -171,6 +171,11 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      m,
                      &model::deleteFrame);
 
+    QObject::connect(ui->frameRateSlider,
+                     &QSlider::sliderMoved,
+                     this,
+                     &MainWindow::updateFps);
+
     QObject::connect(&timer,
                      &QTimer::timeout,
                      this,
@@ -268,9 +273,9 @@ void MainWindow::animate(){
         if(currentFrame>(int)frames.size()-1){
             currentFrame=0;
         }
-        ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame)));
+        ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame).scaled(ui->animation->width(),ui->animation->height())));
         currentFrame++;
-        timer.start(200);
+        timer.start(frameTime*2);
     }
 }
 
@@ -301,6 +306,11 @@ void MainWindow::loadPressed()
     m->loadPressed(fileName);
     QWidget::update();
 
+}
+
+void MainWindow::updateFps(int i)
+{
+    frameTime=82-i;
 }
 
 
