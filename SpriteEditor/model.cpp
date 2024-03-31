@@ -81,6 +81,7 @@ void model::savePressed()
     int count = 0;
 
     animationData["fps"] = a.fps;
+    animationData["frameSize"] = a.frames[0]->imageSize;
     for (auto frame : a.frames)
     {
         QJsonObject frameObj;
@@ -101,12 +102,18 @@ void model::savePressed()
             for (int height = 0; height < layer.height(); height++){
                 QRgb *row = (QRgb*) layer.scanLine(height);
                 for (int width = 0; width < layer.width(); width++){
+
+                    QRgb pixelAlph = row[width];
+                    int alpha = qAlpha(pixelAlph);
+
+                    qDebug() << alpha;
                     QJsonObject pixel;
                     QColor color(row[width]);
                     pixel["red"] = color.red();
                     pixel["green"] = color.green();
                     pixel["blue"] = color.blue();
-                    pixel["alpha"] = color.alpha();
+                    pixel["alpha"] = alpha;
+                    //qDebug() << color.alpha();
 
                     //pixel.insert("RGB value: " , row[width].toObject());
                     //pixel["rgbValue"] = pixel;
@@ -221,7 +228,22 @@ void model::loadPressed()
 
     QJsonObject animation = jsonDoc.object();
     QJsonArray framesArray = animation.value("frames").toArray();
-
+    a.frames[0]->imageSize = animation["frameSize"].toInt();
+    // if (a.frames[0]->imageSize == 16){
+    //     for (auto frame : a.frames){
+    //         frame->updateImageSize16();
+    //     }
+    // }
+    // else if (a.frames[0]->imageSize == 32){
+    //     for (auto frame : a.frames){
+    //         frame->updateImageSize32();
+    //     }
+    // }
+    // else if (a.frames[0]->imageSize == 64){
+    //     for (auto frame : a.frames){
+    //         frame->updateImageSize64();
+    //     }
+    // }
     for(int i = 0; i < framesArray.size(); ++i)
     {
         QJsonObject obj = framesArray[i].toObject();
@@ -237,7 +259,7 @@ void model::loadPressed()
         {
             QJsonObject layerObj = layersArray[j].toObject();
             QJsonArray pixelsArray = layerObj.value("pixels").toArray();
-
+            qDebug() << pixelsArray.size();
             for(int k = 0; k < pixelsArray.size(); ++k)
             {
                 int width = 32;
@@ -316,6 +338,15 @@ void model::addFrame()
 {
     Frame* newF = new Frame();
     newF->frameID = (int)a.frames.size();
+    if (a.frames[0]->imageSize == 16){
+        newF->updateImageSize16();
+    }
+    else if (a.frames[0]->imageSize == 32){
+        newF->updateImageSize32();
+    }
+    else if (a.frames[0]->imageSize == 64){
+        newF->updateImageSize64();
+    }
     a.addFrame(newF);
     switchFrame(newF->frameID);
     emit connectFrameButton();
