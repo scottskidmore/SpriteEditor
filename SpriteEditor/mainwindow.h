@@ -50,5 +50,6 @@ public slots:
     void updateFps(int i);
     void helpClicked();
     void changeUsingLayerText(QString text);
+    void saveDialog();
 };
 #endif // MAINWINDOW_H

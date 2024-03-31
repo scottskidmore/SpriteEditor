@@ -51,8 +51,8 @@ MainWindow::MainWindow(model *m, QWidget *parent)
 
     QObject::connect(ui->actionSave,
                      &QAction::triggered,
-                     m,
-                     &model::savePressed);
+                     this,
+                     &MainWindow::saveDialog);
 
     // QObject::connect(ui->actionLoad,
     //                  &QAction::triggered,
@@ -248,6 +248,15 @@ void MainWindow::updateFrameDisplay(std::vector<QImage> images)
 
 void MainWindow::connectButtonFrame()
 {
+    QObjectList children = ui->scrollAreaContents->children();
+    int index = children.size() - 1;
+    if (index < m->getFrameCount()) {
+        QPushButton *button = new QPushButton(this);
+        button->setMaximumSize(64, 64);
+        button->setMinimumSize(64, 64);
+        button->setGeometry(75, 10, 64, 64);
+        ui->scrollFrameBox->addWidget(button);
+    }
     QObject::connect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
     QObject::connect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
 }
@@ -354,6 +363,14 @@ void MainWindow::helpClicked()
 void MainWindow::changeUsingLayerText(QString text)
 {
     ui->whichLayer->setText(text);
+}
+
+void MainWindow::saveDialog()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, "Save File", QDir::homePath(), "Sprite Animations (*.json)");
+    if (!filePath.isEmpty())
+        m->savePressed(filePath);
+
 }
 
 

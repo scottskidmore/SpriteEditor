@@ -78,7 +78,7 @@ void model::drawPressed()
     currentTool = Pen;
 }
 
-void model::savePressed()
+void model::savePressed(QString path)
 {
     QJsonObject animationData;
     QJsonArray frames;
@@ -138,13 +138,16 @@ void model::savePressed()
     QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
     //qDebug() << "serialized: " << dataTest;
 
-    QFile fileTest(QString("testBasic2.json"));
+    QFile fileTest(path);
 
     if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&fileTest);
         out << dataTest;
         fileTest.close();
         //qDebug() << "written";
+    }
+    else {
+        qDebug() << "Error saving file";
     }
 
 
@@ -291,6 +294,12 @@ void model::loadPressed(QString fileName)
             emit connectFrameButton();
         }
     }
+    getFrameImages();
+}
+
+int model::getFrameCount()
+{
+    return (int)a.frames.size();
 }
 
 void model::circlePressed()
