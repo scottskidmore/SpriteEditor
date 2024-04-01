@@ -209,6 +209,11 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::changeUsingLayerText);
 
+    QObject::connect(m,
+                     &model::updateLoadImageSize,
+                     this,
+                     &MainWindow::changeToLoadSize);
+
 
     m->setDrawLayer();
     this->m = m;
@@ -371,6 +376,21 @@ void MainWindow::saveDialog()
     if (!filePath.isEmpty())
         m->savePressed(filePath);
 
+}
+
+void MainWindow::changeToLoadSize(int size)
+{
+    switch (size) {
+    case 16:
+        ui->canvas->updateGridSize16();
+        break;
+    case 32:
+        ui->canvas->updateGridSize32();
+        break;
+    case 64:
+        ui->canvas->updateGridSize64();
+        break;
+    }
 }
 
 

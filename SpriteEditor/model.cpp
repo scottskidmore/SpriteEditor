@@ -220,7 +220,7 @@ void model::loadPressed(QString fileName)
         return;
     }
 
-
+    //this->clearAll();
 
     // QJsonParseError err;
     // QJsonDocument doc = QJsonDocument::fromJson(jsonData, &err);
@@ -232,7 +232,10 @@ void model::loadPressed(QString fileName)
 
     QJsonObject animation = jsonDoc.object();
     QJsonArray framesArray = animation.value("frames").toArray();
-    a.frames[0]->imageSize = animation["frameSize"].toInt();
+    int frameSize = animation["frameSize"].toInt();
+    this->a.frames[0]->imageSize = frameSize;
+
+    emit updateLoadImageSize(frameSize);
     // if (a.frames[0]->imageSize == 16){
     //     for (auto frame : a.frames){
     //         frame->updateImageSize16();
@@ -255,6 +258,7 @@ void model::loadPressed(QString fileName)
 
         Frame* newF = new Frame();
         newF->frameID = (int)a.frames.size();
+        updateFrameSizeInt(frameSize, newF);
         // a.addFrame(newF);
         // switchFrame(newF->frameID);
         // emit connectFrameButton();
@@ -394,22 +398,36 @@ void model::deleteFrame()
 
 void model::updateAllFrameSizes(){
     QObject *senderObject = QObject::sender();
-    if (senderObject->objectName() == "size16"){
+    int size = 10;
+    if (senderObject->objectName() == "size16" || size == 16){
         for (auto frame : a.frames){
             frame->updateImageSize16();
         }
     }
-    else if (senderObject->objectName() == "size32"){
+    else if (senderObject->objectName() == "size32" || size == 32){
         for (auto frame : a.frames){
             frame->updateImageSize32();
         }
     }
-    else if (senderObject->objectName() == "size64"){
+    else if (senderObject->objectName() == "size64" || size == 64){
         for (auto frame : a.frames){
             frame->updateImageSize64();
         }
     }
     getFrameImages();
+}
+
+void model::updateFrameSizeInt(int size, Frame* frame)
+{
+    if (size == 16){
+        frame->updateImageSize16();
+    }
+    else if (size == 32){
+        frame->updateImageSize32();
+    }
+    else if (size == 64){
+        frame->updateImageSize64();
+    }
 }
 
 void model::updateFrameRate(int rate)

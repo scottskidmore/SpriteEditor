@@ -51,5 +51,6 @@ public slots:
     void helpClicked();
     void changeUsingLayerText(QString text);
     void saveDialog();
+    void changeToLoadSize(int size);
 };
 #endif // MAINWINDOW_H

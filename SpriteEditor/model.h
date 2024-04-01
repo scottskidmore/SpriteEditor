@@ -45,6 +45,7 @@ signals:
     void connectFrameUpdate();
     void updateFrameDisplay(std::vector<QImage> images);
     void swapLayerText(QString text);
+    void updateLoadImageSize(int size);
 
 
 public slots:
@@ -103,6 +104,7 @@ public slots:
     /// \brief updateAllFrameSizes
     ///
     void updateAllFrameSizes();
+    void updateFrameSizeInt(int size, Frame* frame);
     ///
     /// \brief updateFrameRate
     ///

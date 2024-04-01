@@ -300,10 +300,13 @@
      <string/>
     </property>
     <property name="minimum">
-     <number>15</number>
+     <number>1</number>
     </property>
     <property name="maximum">
      <number>60</number>
+    </property>
+    <property name="sliderPosition">
+     <number>1</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -341,7 +344,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>15</string>
+     <string>1</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
