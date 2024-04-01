@@ -337,7 +337,7 @@ void MainWindow::onNewButtonPressed()
 void MainWindow::loadPressed()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                    "/home",
+                                                    QDir::homePath(),
                                                     tr("Sprite Animations (*.ssp)"));
     m->loadPressed(fileName);
     QWidget::update();
@@ -379,7 +379,7 @@ void MainWindow::changeUsingLayerText(QString text)
 
 void MainWindow::saveDialog()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, "Save File", QDir::homePath(), "Sprite Animations (*.json)");
+    QString filePath = QFileDialog::getSaveFileName(this, "Save File", QDir::homePath(), "Sprite Animations (*.ssp)");
     if (!filePath.isEmpty())
         m->savePressed(filePath);
 
