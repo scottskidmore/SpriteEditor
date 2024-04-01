@@ -3,7 +3,7 @@
 #include "canvas.h"
 #include <QFileDialog>
 
-MainWindow::MainWindow(model *m, QWidget *parent)
+MainWindow::MainWindow(Model *m, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -13,7 +13,7 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(ui->canvas,
             &Canvas::gridClicked,
             m,
-            &model::editImage);
+            &Model::editImage);
 
     QObject::connect(m->f,
             &Frame::updateImage,
@@ -23,31 +23,31 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(ui->ActionDraw,
             &QAction::triggered,
             m,
-            &model::drawPressed);
+            &Model::drawPressed);
 
     QObject::connect(ui->actionSquare,
                      &QAction::triggered,
                      m,
-                     &model::squarePressed);
+                     &Model::squarePressed);
 
     QObject::connect(ui->actionCircle,
                      &QAction::triggered,
                      m,
-                     &model::circlePressed);
+                     &Model::circlePressed);
     QObject::connect(ui->actionSpray_Paint,
                      &QAction::triggered,
                      m,
-                     &model::sprayCanPressed);
+                     &Model::sprayCanPressed);
 
     QObject::connect(ui->canvas,
                      &Canvas::drawingAction,
                      m,
-                     &model::handleDrawingShapes);
+                     &Model::handleDrawingShapes);
 
     QObject::connect(ui->actionErase,
             &QAction::triggered,
             m,
-            &model::erasePressed);
+            &Model::erasePressed);
 
     QObject::connect(ui->actionSave,
                      &QAction::triggered,
@@ -70,39 +70,39 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &MainWindow::chooseColor);
 
     QObject::connect(m,
-                     &model::updateFrameDisplay,
+                     &Model::updateFrameDisplay,
                      this,
                      &MainWindow::updateFrameDisplay);
 
     QObject::connect(m,
-                     &model::updateFrameDisplay,
+                     &Model::updateFrameDisplay,
                      this,
                      &MainWindow::storeFrames);
 
     QObject::connect(ui->layer1,
                      &QPushButton::clicked,
                      m,
-                     &model::layer1);
+                     &Model::layer1);
 
     QObject::connect(ui->layer2,
                      &QPushButton::clicked,
                      m,
-                     &model::layer2);
+                     &Model::layer2);
 
     QObject::connect(ui->layer3,
                      &QPushButton::clicked,
                      m,
-                     &model::layer3);
+                     &Model::layer3);
 
     QObject::connect(ui->layer4,
                      &QPushButton::clicked,
                      m,
-                     &model::layer4);
+                     &Model::layer4);
 
     QObject::connect(ui->layer5,
                      &QPushButton::clicked,
                      m,
-                     &model::layer5);
+                     &Model::layer5);
 
 
 
@@ -128,17 +128,17 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
                      m,
-                     &model::updateAllFrameSizes);
+                     &Model::updateAllFrameSizes);
 
     QObject::connect(ui->size32,
                      &QPushButton::clicked,
                      m,
-                     &model::updateAllFrameSizes);
+                     &Model::updateAllFrameSizes);
 
     QObject::connect(ui->size64,
                      &QPushButton::clicked,
                      m,
-                     &model::updateAllFrameSizes);
+                     &Model::updateAllFrameSizes);
 
 
     QObject::connect(ui->frame0,
@@ -149,20 +149,20 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(m->f,
                      &Frame::changeFrame,
                      m,
-                     &model::switchFrame);
+                     &Model::switchFrame);
 
     QObject::connect(this,
                      &MainWindow::frameButtonAdded,
                      m,
-                     &model::addFrame);
+                     &Model::addFrame);
 
     QObject::connect(m,
-                     &model::connectFrameButton,
+                     &Model::connectFrameButton,
                      this,
                      &MainWindow::connectButtonFrame);
 
     QObject::connect(m,
-                     &model::connectFrameUpdate,
+                     &Model::connectFrameUpdate,
                      this,
                      &MainWindow::connectNewFrame);
 
@@ -173,14 +173,14 @@ MainWindow::MainWindow(model *m, QWidget *parent)
     QObject::connect(this,
                      &MainWindow::frameButtonRemoved,
                      m,
-                     &model::deleteFrame);
+                     &Model::deleteFrame);
 
     QObject::connect(ui->frameRateSlider,
                      &QSlider::sliderMoved,
                      this,
                      &MainWindow::updateFps);
     QObject::connect(m,
-                     &model::loadFps,
+                     &Model::loadFps,
                      this,
                      &MainWindow::updateFps);
 
@@ -193,19 +193,19 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::onNewButtonPressed);
     QObject::connect(m,
-                     &model::clearAnimation,
+                     &Model::clearAnimation,
                      this,
                      &MainWindow::onNewButtonPressed);
 
     QObject::connect(this,
                      &MainWindow::createNewSprite,
                      m,
-                     &model::clearAll);
+                     &Model::clearAll);
 
     QObject::connect(ui->frameRateSlider,
                      &QSlider::sliderMoved,
                      m,
-                     &model::updateFrameRate);
+                     &Model::updateFrameRate);
 
     QObject::connect(ui->actionHelp,
                      &QAction::triggered,
@@ -213,12 +213,12 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &MainWindow::helpClicked);
 
     QObject::connect(m,
-                     &model::swapLayerText,
+                     &Model::swapLayerText,
                      this,
                      &MainWindow::changeUsingLayerText);
 
     QObject::connect(m,
-                     &model::updateLoadImageSize,
+                     &Model::updateLoadImageSize,
                      this,
                      &MainWindow::changeToLoadSize);
 
@@ -271,7 +271,7 @@ void MainWindow::connectButtonFrame()
         ui->scrollFrameBox->addWidget(button);
     }
     QObject::connect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
-    QObject::connect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
+    QObject::connect(m->a.frames.back(), &Frame::changeFrame, m, &Model::switchFrame);
 }
 
 void MainWindow::connectNewFrame()
@@ -292,7 +292,7 @@ void MainWindow::onRemoveFrame()
         ui->scrollFrameBox->removeWidget(c);
         delete c;
         QObject::disconnect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
-        QObject::disconnect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
+        QObject::disconnect(m->a.frames.back(), &Frame::changeFrame, m, &Model::switchFrame);
         ui->scrollFrameBox->update();
         emit frameButtonRemoved();
     }
@@ -325,7 +325,7 @@ void MainWindow::onNewButtonPressed()
         ui->scrollFrameBox->removeWidget(c);
         delete c;
         QObject::disconnect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
-        QObject::disconnect(m->a.frames.back(), &Frame::changeFrame, m, &model::switchFrame);
+        QObject::disconnect(m->a.frames.back(), &Frame::changeFrame, m, &Model::switchFrame);
         ui->scrollFrameBox->update();
         index--;
     }

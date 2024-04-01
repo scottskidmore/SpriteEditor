@@ -18,14 +18,14 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(model*, QWidget *parent = nullptr);
+    MainWindow(Model*, QWidget *parent = nullptr);
     ~MainWindow();
 
 
 private:
     QTimer timer;
     Ui::MainWindow *ui;
-    model* m;
+    Model* m;
     void chooseColor();
     int currentFrame=0;
     std::vector<QImage> frames;

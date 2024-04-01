@@ -12,19 +12,19 @@
 #include <QPushButton>
 #include <QObject>
 
-class model : public QObject
+class Model : public QObject
 {
     Q_OBJECT
 public:
-    explicit model(QObject *parent = nullptr);
-    //model();
+    explicit Model(QObject *parent = nullptr);
+    //Model();
     Draw pen;
     Animation a;
     Frame* f;
     void setDrawLayer();
     void loadPressed(QString file);
     ///
-    /// \brief getFrameCount - returns the number of frames this model/animation has.
+    /// \brief getFrameCount - returns the number of frames this Model/animation has.
     /// \return number of frames
     ///
     int getFrameCount();
