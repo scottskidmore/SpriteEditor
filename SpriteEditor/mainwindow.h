@@ -26,10 +26,13 @@ private:
     QTimer timer;
     Ui::MainWindow *ui;
     model* m;
-    void chooseColor();
     int currentFrame=0;
     std::vector<QImage> frames;
     int frameTime=67;
+    ///
+    /// \brief chooseColor displays a popup of color choices then sets pen color to chosen color.
+    ///
+    void chooseColor();
 
 signals:
     void frameButtonAdded();
@@ -38,6 +41,9 @@ signals:
 
 public slots:
     //void onGridClicked(QPoint);
+    ///
+    /// \brief onAddFrame
+    ///
     void onAddFrame();
     void updateFrameDisplay(std::vector<QImage> images);
     void storeFrames(std::vector<QImage> images);

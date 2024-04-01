@@ -54,11 +54,6 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      this,
                      &MainWindow::saveDialog);
 
-    // QObject::connect(ui->actionLoad,
-    //                  &QAction::triggered,
-    //                  m,
-    //                  &model::loadPressed);
-
     QObject::connect(ui->actionLoad,
                      &QAction::triggered,
                      this,

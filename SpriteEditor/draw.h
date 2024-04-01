@@ -28,7 +28,6 @@ public:
     /// \param QPoint point to draw at
     /// \param int size of circle
     void drawCircle(QPoint, int);
-    //void drawTraingle(QPoint, int);
     /// \brief setImage sets this image to the provided image
     /// \param QImage& reference of image to set this
     void setImage(QImage&);

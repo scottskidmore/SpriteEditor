@@ -10,23 +10,54 @@ class Frame : public QObject
     Q_OBJECT
 public:
     explicit Frame(QObject *parent = nullptr);
+    ///
+    /// \brief drawPixel draws pixel at location stored by QPoint on the current image.
+    /// \param QPoint where to draw the pixel
+    ///
     void drawPixel(QPoint);
     QImage& getCurrentLayer();
     int frameID;
     std::vector<QImage> images;
+    ///
+    /// \brief setCurrentLayer sets current layer to layer at specified index of layer collection.
+    /// \param int i the index of the layer to switch to.
+    ///
     void setCurrentLayer(int);
     int imageSize;
     int currentImage;
 
 signals:
+    ///
+    /// \brief Send signal to update image
+    /// \param vector<QImage> image to update
+    ///
     void updateImage(std::vector<QImage>);
+    ///
+    /// \brief changeFrame change current frame to frame with the passed ID.
+    /// \param id the ID of the frame.
+    ///
     void changeFrame(int id);
 
 public slots:
+    ///
+    /// \brief sendImages emits images
+    ///
     void sendImages();
+    ///
+    /// \brief frameButtonPressed change current frame to clicked frame
+    ///
     void frameButtonPressed();
+    ///
+    /// \brief updateImageSize16 clears images and sets new image sizes to 16x16
+    ///
     void updateImageSize16();
+    ///
+    /// \brief updateImageSize32 clears images and sets new image sizes to 32x32
+    ///
     void updateImageSize32();
+    ///
+    /// \brief updateImageSize64 clears images and sets new image sizes to 64x64
+    ///
     void updateImageSize64();
 
 };
