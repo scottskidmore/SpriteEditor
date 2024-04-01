@@ -6,20 +6,20 @@ Draw::Draw(QObject *parent)
     color = Qt::black;
 }
 
-int Draw::getLineWdith()
-{
+// int Draw::getLineWdith()
+// {
 
-}
+// }
 
-void Draw::setLineWdith(int)
-{
+// void Draw::setLineWdith(int)
+// {
 
-}
+// }
 
-QColor Draw::getColor()
-{
+// QColor Draw::getColor()
+// {
 
-}
+// }
 
 void Draw::setColor(QColor c)
 {
@@ -77,7 +77,7 @@ QImage Draw::getImage()
     return *image;
 }
 
-void Draw::drawImage(QPoint point)
-{
+// void Draw::drawImage(QPoint point)
+// {
 
-}
+// }
