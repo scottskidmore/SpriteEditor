@@ -1,8 +1,8 @@
 #include "model.h"
 #include <QFileDialog>
-//model::model() {}
+//Model::Model() {}
 
-model::model(QObject *parent)
+Model::Model(QObject *parent)
     : QObject{parent}
 {
     //currentTool = 'd';
@@ -14,13 +14,13 @@ model::model(QObject *parent)
     //QObject::connect(f, &Frame::changeFrame, this, &model::switchFrame);
 }
 
-void model::setDrawLayer()
+void Model::setDrawLayer()
 {
     pen.setImage(f->getCurrentLayer());
     emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
-void model::getFrameImages()
+void Model::getFrameImages()
 {
     std::vector<QImage> imageList;
     for(int i = 0; i < (int)a.frames.size(); i++) {
@@ -37,7 +37,7 @@ void model::getFrameImages()
     emit updateFrameDisplay(imageList);
 }
 
-void model::editImage(QPoint p)
+void Model::editImage(QPoint p)
 {
     setDrawLayer();
     if (currentTool == Pen)
@@ -51,7 +51,7 @@ void model::editImage(QPoint p)
     getFrameImages();
 }
 
-void model::handleDrawingShapes(QPoint startPoint, QPoint endPoint) {
+void Model::handleDrawingShapes(QPoint startPoint, QPoint endPoint) {
     // Determine the size of the shape to be drawn
     int width = abs(endPoint.x() - startPoint.x());
     int height = abs(endPoint.y() - startPoint.y());
@@ -68,17 +68,17 @@ void model::handleDrawingShapes(QPoint startPoint, QPoint endPoint) {
     getFrameImages();
 }
 
-void model::erasePressed()
+void Model::erasePressed()
 {
     currentTool = Eraser;
 }
 
-void model::drawPressed()
+void Model::drawPressed()
 {
     currentTool = Pen;
 }
 
-void model::savePressed(QString path)
+void Model::savePressed(QString path)
 {
     QJsonObject animationData;
     QJsonArray frames;
@@ -145,7 +145,7 @@ void model::savePressed(QString path)
     }
 }
 
-void model::loadPressed(QString fileName)
+void Model::loadPressed(QString fileName)
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) // if we cant read the file
@@ -220,52 +220,52 @@ void model::loadPressed(QString fileName)
     emit loadFps(animation["fps"].toInt());
 }
 
-int model::getFrameCount()
+int Model::getFrameCount()
 {
     return (int)a.frames.size();
 }
 
-void model::circlePressed()
+void Model::circlePressed()
 {
     currentTool = Circle;
 }
 
-void model::squarePressed()
+void Model::squarePressed()
 {
     currentTool = Square;
 }
 
-void model::sprayCanPressed()
+void Model::sprayCanPressed()
 {
     currentTool = SprayCan;
 }
 
-void model::layer1(){
+void Model::layer1(){
     this->f->setCurrentLayer(0);
     emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
-void model::layer2(){
+void Model::layer2(){
     this->f->setCurrentLayer(1);
     emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
-void model::layer3(){
+void Model::layer3(){
     this->f->setCurrentLayer(2);
     emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
-void model::layer4(){
+void Model::layer4(){
     this->f->setCurrentLayer(3);
     emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
-void model::layer5(){
+void Model::layer5(){
     this->f->setCurrentLayer(4);
     emit swapLayerText(QString("Using Layer: %1").arg(f->currentImage+1));
 }
 
-void model::clearAll()
+void Model::clearAll()
 {
     a.frames.clear();
     this->f = new Frame();
@@ -277,7 +277,7 @@ void model::clearAll()
     getFrameImages();
 }
 
-void model::addFrame()
+void Model::addFrame()
 {
     Frame* newF = new Frame();
     newF->frameID = (int)a.frames.size();
@@ -295,7 +295,7 @@ void model::addFrame()
     emit connectFrameButton();
 }
 
-void model::switchFrame(int id)
+void Model::switchFrame(int id)
 {
     this->f = a.frames[id];
     setDrawLayer();
@@ -304,7 +304,7 @@ void model::switchFrame(int id)
     getFrameImages();
 }
 
-void model::deleteFrame()
+void Model::deleteFrame()
 {
     if (a.frames.size() > 1)
     {
@@ -315,7 +315,7 @@ void model::deleteFrame()
     qDebug() << a.frames.size();
 }
 
-void model::updateAllFrameSizes(){
+void Model::updateAllFrameSizes(){
     QObject *senderObject = QObject::sender();
     int size = 10;
     if (senderObject->objectName() == "size16" || size == 16){
@@ -336,7 +336,7 @@ void model::updateAllFrameSizes(){
     getFrameImages();
 }
 
-void model::updateFrameSizeInt(int size, Frame* frame)
+void Model::updateFrameSizeInt(int size, Frame* frame)
 {
     if (size == 16){
         frame->updateImageSize16();
@@ -349,7 +349,7 @@ void model::updateFrameSizeInt(int size, Frame* frame)
     }
 }
 
-void model::updateFrameRate(int rate)
+void Model::updateFrameRate(int rate)
 {
     a.setfps(rate);
 }
