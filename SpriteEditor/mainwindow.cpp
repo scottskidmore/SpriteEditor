@@ -332,7 +332,6 @@ void MainWindow::onNewButtonPressed()
 
 void MainWindow::loadPressed()
 {
-    //qDebug() << "Load pressed!!!!!!";
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                     "/home",
                                                     tr("Sprite Animations (*.ssp)"));

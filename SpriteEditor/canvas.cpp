@@ -31,20 +31,15 @@ void Canvas::paintEvent(QPaintEvent *event) {
 
     for (int i = 0; i < gridSize+1; i++) {
         int xy = i * (512/gridSize);
-        painter.drawLine(xy, 0, xy, 512); //vertical line
+        painter.drawLine(xy, 0, xy, 512);
         painter.drawLine(0, xy, 512, xy);
     }
     qDebug() << "not printing layer, layersSize: " << layers.size();
-    // change later for layers
     if (!layers.empty()) {
         qDebug() << "printing layer, layersSize: " << layers.size();
-       // QPixmap map = QPixmap::fromImage(layers[0]);
         for(QImage layer : layers){
             painter.drawPixmap(0, 0,512,512, QPixmap::fromImage(layer));
         }
-        //map = map.scaled(512, 512);
-        //map.toImage().save(QString("image2.png"));
-       // painter.drawPixmap(0, 0, 512, 512, map);
     }
 }
 
@@ -84,9 +79,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
         emit drawingAction(startPoint, endPoint);
         trackMouse = false;  // Stop tracking the mouse
     }
-
     update();
-
 }
 
 void Canvas::updateCanvas(std::vector<QImage> newLayers)

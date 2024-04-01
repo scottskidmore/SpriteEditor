@@ -3,7 +3,6 @@
 Frame::Frame(QObject *parent)
 {
     QImage newImage(32, 32, QImage::Format_ARGB32);
-    //newImage.setPixelColor(16, 16, Qt::blue);
     newImage.fill(Qt::transparent);
     images.push_back(newImage);
     images.push_back(newImage);
@@ -74,5 +73,4 @@ void Frame::updateImageSize64(){
 }
  void Frame::setCurrentLayer(int i){
     currentImage=i;
-
 }

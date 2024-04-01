@@ -17,7 +17,6 @@ public:
     void drawSquare(QPoint, int);
     void drawCircle(QPoint, int);
     void drawTraingle(QPoint, int);
-    //void drawPixel(QPoint);
     void setImage(QImage&);
     void eraseTool(QPoint);
     QImage getImage();

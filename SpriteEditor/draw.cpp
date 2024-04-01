@@ -30,7 +30,6 @@ void Draw::drawSquare(QPoint p , int width)
 {
     QPainter painter(this->image);
     painter.setPen(color);
-    //painter.setBrush(color);
     painter.drawRect(p.x(), p.y(), width, width);
 }
 
@@ -38,7 +37,6 @@ void Draw::drawCircle(QPoint p, int diameter)
 {
     QPainter painter(this->image);
     painter.setPen(color);
-    //painter.setBrush(color);
     painter.drawEllipse(p.x(), p.y(), diameter, diameter);
 }
 
@@ -58,7 +56,6 @@ void Draw::sprayPaint(QPoint center, int radius, int density)
         }
     }
 }
-
 
 void Draw::drawPixel(QPoint point)
 {
