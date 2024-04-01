@@ -63,9 +63,9 @@ public slots:
     void updateCanvas(std::vector<QImage>);
     /// \brief updateGridSize16 updates the UI grid size to 16x16
     void updateGridSize16();
-    /// \brief updateGridSize16 updates the UI grid size to 32x32
+    /// \brief updateGridSize32 updates the UI grid size to 32x32
     void updateGridSize32();
-    /// \brief updateGridSize16 updates the UI grid size to 64x64
+    /// \brief updateGridSize64 updates the UI grid size to 64x64
     void updateGridSize64();
     /// \brief loadPressed displays the dialog box for file loading
     void loadPressed();
