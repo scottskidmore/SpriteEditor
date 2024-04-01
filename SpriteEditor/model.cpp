@@ -86,130 +86,70 @@ void model::savePressed(QString path)
 
     animationData["fps"] = a.fps;
     animationData["frameSize"] = a.frames[0]->imageSize;
-    for (auto frame : a.frames)
+    for (auto frame : a.frames) // loop through the frames
     {
         QJsonObject frameObj;
         QJsonArray layers;
         frameObj["frameID"] = frame->frameID;
         frameObj["layers"] = layers;
-        //frames.append(frameObj);
-        //for (auto pixel : )
-
-        for (auto layer : frame->images)
+        for (auto layer : frame->images) // loop through the layers in each frame
         {
             QJsonObject image;
             image["layerID"] = count;
             QJsonArray pixels;
-            //image["pixels"] = pixels;
-            //pixels = layer->pixels;
-            //frames.pixels;
-            for (int height = 0; height < layer.height(); height++){
-                QRgb *row = (QRgb*) layer.scanLine(height);
-                for (int width = 0; width < layer.width(); width++){
 
+            for (int height = 0; height < layer.height(); height++) // now go thorugh the pixels
+            {
+                QRgb *row = (QRgb*) layer.scanLine(height);
+                for (int width = 0; width < layer.width(); width++)
+                {
+                    // get the pixel colors and write them to the JSON
                     QRgb pixelAlph = row[width];
                     int alpha = qAlpha(pixelAlph);
-
-                    qDebug() << alpha;
                     QJsonObject pixel;
                     QColor color(row[width]);
+
                     pixel["red"] = color.red();
                     pixel["green"] = color.green();
                     pixel["blue"] = color.blue();
                     pixel["alpha"] = alpha;
-                    //qDebug() << color.alpha();
-
-                    //pixel.insert("RGB value: " , row[width].toObject());
-                    //pixel["rgbValue"] = pixel;
                     pixels.append(pixel);
                 }
             }
+            // add the pixels to the layer
             image.insert("pixels", pixels);
             layers.append(image);
             count++;
         }
+        // add the layers to the frames
         frameObj.insert("layers", layers);
-
         frames.append(frameObj);
     }
+    // add the frames to the animation
     animationData.insert("frames", frames);
 
     QJsonDocument docTest(animationData);
     QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
-    //qDebug() << "serialized: " << dataTest;
-    qDebug() << path;
     int lastPoint = path.lastIndexOf(".");
     QString pathNoJson = path.left(lastPoint);
-    qDebug() << pathNoJson;
     QFile fileTest(pathNoJson += ".ssp");
 
-    if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) // write the JSON data to the file
+    {
         QTextStream out(&fileTest);
         out << dataTest;
         fileTest.close();
-        //qDebug() << "written";
     }
-    else {
+    else { // if we cant save the file
         qDebug() << "Error saving file";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //old code
-    // QJsonObject json;
-
-    // QByteArray byteArray;
-    // QBuffer buffer(&byteArray);
-    // buffer.open(QIODevice::WriteOnly);
-    // f.getCurrentLayer().save(&buffer, "PNG");
-
-    // QString base64Image = QString::fromLatin1(byteArray.toBase64().data());
-
-    // json["image"] = base64Image;
-
-    // qDebug() << json;
-
-    // QJsonDocument doc(json);
-    // QByteArray data = doc.toJson(QJsonDocument::Indented);
-    // qDebug() << "serialized: " << data;
-
-    // QFile file(QString("testJson.json"));
-
-    // if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    //     QTextStream out(&file);
-    //     out << data;
-    //     file.close();
-    //     qDebug() << "written";
-    // }
-
-    // QFile file2(QString("testJson.json"));
-    // file2.open(QIODevice::ReadOnly | QIODevice::Text);
-    // QByteArray imagejsonData = file2.readAll();
-    // file2.close();
-    // QJsonDocument doc2 = QJsonDocument::fromJson(imagejsonData);
-    // QJsonObject jsonImage = doc2.object();
-    // QString baseImage = jsonImage["image"].toString();
-    // QByteArray imageData = QByteArray::fromBase64(baseImage.toLatin1());
-    // QImage testImage;
-    // testImage.loadFromData(imageData);
-
-    // testImage.save("testImage.png", "PNG");
 }
 
 void model::loadPressed(QString fileName)
 {
     QFile file(fileName);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) // if we cant read the file
+    {
         qDebug() << "Failed to open file for reading";
         return;
     }
@@ -218,31 +158,21 @@ void model::loadPressed(QString fileName)
 
     QJsonParseError jsonError;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &jsonError);
-    if (jsonError.error != QJsonParseError::NoError) {
+    if (jsonError.error != QJsonParseError::NoError) // if we cant read the JSON
+    {
         qDebug() << "Failed to parse JSON:" << jsonError.errorString();
         return;
     }
 
-
+    // initial setup, clear the animation, and set the proper image size
     emit clearAnimation();
-
-    //this->clearAll();
-
-    // QJsonParseError err;
-    // QJsonDocument doc = QJsonDocument::fromJson(jsonData, &err);
-
-    // if(err.error != QJsonParseError::NoError)
-    // {
-    //     return; //-1; // Failure
-    // }
-
     QJsonObject animation = jsonDoc.object();
     QJsonArray framesArray = animation.value("frames").toArray();
     int frameSize = animation["frameSize"].toInt();
     this->a.frames[0]->imageSize = frameSize;
-
     emit updateLoadImageSize(frameSize);
-    for(int i = 0; i < framesArray.size(); ++i)
+
+    for(int i = 0; i < framesArray.size(); ++i) // loop through the frames
     {
         QJsonObject obj = framesArray[i].toObject();
         QJsonArray layersArray = obj.value("layers").toArray();
@@ -250,16 +180,13 @@ void model::loadPressed(QString fileName)
         Frame* newF = new Frame();
         newF->frameID = (int)a.frames.size();
         updateFrameSizeInt(frameSize, newF);
-        // a.addFrame(newF);
-        // switchFrame(newF->frameID);
-        // emit connectFrameButton();
 
-        for(int j = 0; j < layersArray.size(); ++j)
+        for(int j = 0; j < layersArray.size(); ++j) // loop through the layers
         {
             QJsonObject layerObj = layersArray[j].toObject();
             QJsonArray pixelsArray = layerObj.value("pixels").toArray();
             qDebug() << pixelsArray.size();
-            for(int k = 0; k < pixelsArray.size(); ++k)
+            for(int k = 0; k < pixelsArray.size(); ++k) // loop through the pixels
             {
                 int width = frameSize;
                 int x = k % width;
@@ -272,23 +199,23 @@ void model::loadPressed(QString fileName)
                 int blue = pixelObj["blue"].toInt();
                 int alpha = pixelObj["alpha"].toInt();
 
+                // set the pixel at the x and y values to the color
                 QColor color(red, green, blue, alpha);
                 newF->images[j].setPixelColor(point, color);
-
             }
-            //a.frames[i] =
         }
-        if (i == 0)
+        if (i == 0) // if its the first frame
         {
             a.frames[0] = newF;
         }
-        else
+        else // otherwise make a new frame
         {
             a.addFrame(newF);
             switchFrame(newF->frameID);
             emit connectFrameButton();
         }
     }
+    // update the frame display and set the saved fps
     getFrameImages();
     emit loadFps(animation["fps"].toInt());
 }
