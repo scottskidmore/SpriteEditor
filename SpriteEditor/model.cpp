@@ -270,7 +270,7 @@ void model::loadPressed(QString fileName)
             qDebug() << pixelsArray.size();
             for(int k = 0; k < pixelsArray.size(); ++k)
             {
-                int width = 32;
+                int width = frameSize;
                 int x = k % width;
                 int y = k / width;
                 QPoint point(x, y);
