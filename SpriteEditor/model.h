@@ -46,6 +46,7 @@ signals:
     void updateFrameDisplay(std::vector<QImage> images);
     void swapLayerText(QString text);
     void updateLoadImageSize(int size);
+    void clearAnimation();
 
 
 public slots:

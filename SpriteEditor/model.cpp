@@ -220,6 +220,9 @@ void model::loadPressed(QString fileName)
         return;
     }
 
+
+    emit clearAnimation();
+
     //this->clearAll();
 
     // QJsonParseError err;

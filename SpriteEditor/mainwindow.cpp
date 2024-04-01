@@ -188,6 +188,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &QAction::triggered,
                      this,
                      &MainWindow::onNewButtonPressed);
+    QObject::connect(m,
+                     &model::clearAnimation,
+                     this,
+                     &MainWindow::onNewButtonPressed);
 
     QObject::connect(this,
                      &MainWindow::createNewSprite,
