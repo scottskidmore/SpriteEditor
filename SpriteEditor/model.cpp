@@ -137,8 +137,11 @@ void model::savePressed(QString path)
     QJsonDocument docTest(animationData);
     QByteArray dataTest = docTest.toJson(QJsonDocument::Indented);
     //qDebug() << "serialized: " << dataTest;
-
-    QFile fileTest(path);
+    qDebug() << path;
+    int lastPoint = path.lastIndexOf(".");
+    QString pathNoJson = path.left(lastPoint);
+    qDebug() << pathNoJson;
+    QFile fileTest(pathNoJson += ".ssp");
 
     if (fileTest.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&fileTest);

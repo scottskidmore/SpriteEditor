@@ -335,7 +335,7 @@ void MainWindow::loadPressed()
     //qDebug() << "Load pressed!!!!!!";
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
                                                     "/home",
-                                                    tr("Sprite Animations (*.json)"));
+                                                    tr("Sprite Animations (*.ssp)"));
     m->loadPressed(fileName);
     QWidget::update();
 
