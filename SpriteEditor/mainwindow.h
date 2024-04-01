@@ -29,7 +29,7 @@ private:
     void chooseColor();
     int currentFrame=0;
     std::vector<QImage> frames;
-    int frameTime=67;
+    int frameTime=1000;
 
 signals:
     void frameButtonAdded();

@@ -312,7 +312,7 @@ void MainWindow::animate(){
         }
         ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame).scaled(ui->animation->width(),ui->animation->height())));
         currentFrame++;
-        timer.start(frameTime*2);
+        timer.start(frameTime);
     }
 }
 
@@ -346,7 +346,7 @@ void MainWindow::loadPressed()
 
 void MainWindow::updateFps(int i)
 {
-    frameTime=82-i;
+    frameTime= (1.0 / (double)i) * 1000;
 }
 
 void MainWindow::helpClicked()
