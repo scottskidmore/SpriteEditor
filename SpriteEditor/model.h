@@ -47,6 +47,7 @@ signals:
     void swapLayerText(QString text);
     void updateLoadImageSize(int size);
     void clearAnimation();
+    void loadFps(int fps);
 
 
 public slots:

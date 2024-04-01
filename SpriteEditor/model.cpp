@@ -242,21 +242,6 @@ void model::loadPressed(QString fileName)
     this->a.frames[0]->imageSize = frameSize;
 
     emit updateLoadImageSize(frameSize);
-    // if (a.frames[0]->imageSize == 16){
-    //     for (auto frame : a.frames){
-    //         frame->updateImageSize16();
-    //     }
-    // }
-    // else if (a.frames[0]->imageSize == 32){
-    //     for (auto frame : a.frames){
-    //         frame->updateImageSize32();
-    //     }
-    // }
-    // else if (a.frames[0]->imageSize == 64){
-    //     for (auto frame : a.frames){
-    //         frame->updateImageSize64();
-    //     }
-    // }
     for(int i = 0; i < framesArray.size(); ++i)
     {
         QJsonObject obj = framesArray[i].toObject();
@@ -305,6 +290,7 @@ void model::loadPressed(QString fileName)
         }
     }
     getFrameImages();
+    emit loadFps(animation["fps"].toInt());
 }
 
 int model::getFrameCount()

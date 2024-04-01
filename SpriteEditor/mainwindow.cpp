@@ -179,6 +179,10 @@ MainWindow::MainWindow(model *m, QWidget *parent)
                      &QSlider::sliderMoved,
                      this,
                      &MainWindow::updateFps);
+    QObject::connect(m,
+                     &model::loadFps,
+                     this,
+                     &MainWindow::updateFps);
 
     QObject::connect(&timer,
                      &QTimer::timeout,
