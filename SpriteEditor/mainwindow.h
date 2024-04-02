@@ -3,12 +3,12 @@
 #include <QMainWindow>
 #include "model.h"
 #include "ui_mainwindow.h"
-#include "canvas.h"
 #include "qtimer.h"
 #include <QColorDialog>
 #include <QMessageBox>
 #include <QFileDialog>
-//Drew Humphrey
+//Reviewed by - Drew Humphrey
+//Reviewed by - Tanner Rowlett
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

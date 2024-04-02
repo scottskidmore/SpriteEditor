@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-//Drew Humphrey
+//Reviewed by - Drew Humphrey
+//Reviewed by - Tanner Rowlett
 
 MainWindow::MainWindow(Model *m, QWidget *parent)
     : QMainWindow(parent)
@@ -301,10 +302,8 @@ void MainWindow::storeFrames(std::vector<QImage> images){
 }
 
 void MainWindow::animate(){
-    if((int)frames.size()==0){
-
-    }else{
-        if(currentFrame>(int)frames.size()-1){
+    if((int)frames.size() != 0){
+        if(currentFrame > (int)frames.size()-1){
             currentFrame=0;
         }
         if (!ui->scaleAnimation->isChecked())
@@ -345,14 +344,21 @@ void MainWindow::loadPressed()
 
 void MainWindow::updateFps(int i)
 {
+    if (i > 70 || i < 0)
+        i = 1;
+
     frameTime= (1.0 / (double)i) * 1000;
+    if(!timer.isActive())
+        animate();
 }
 
 void MainWindow::helpClicked()
 {
     QString tips = "Here are some useful tips/notes about our sprite editor:\n\n"
                    "When changing the sprite size, it will clear the images on all frames/layers.\n"
-                   "When removing a frame it will only remove the most recently added frame. And it will never remove the first frame.\n\n"
+                   "When removing a frame it will only remove the most recently added frame. And it will never remove the first frame.\n"
+                   "When drawing squares/circles you can drag from one corner to another and it will fill the space in between with the shape,\nif you drag straight down it will draw to the furthest point.\n"
+                   "You can only save/load .ssp files\n\n"
                    "Keyboard Shortcuts:\n"
                    "Draw: Ctrl+D\n"
                    "Erase: Ctrl+E\n"
@@ -361,8 +367,8 @@ void MainWindow::helpClicked()
                    "New: Ctrl+N\n"
                    "Load: Ctrl+L\n"
                    "Help: Ctrl+H\n"
-                   "draw Circle: Ctrl+C\n"
-                   "draw Square: Ctrl+R";
+                   "Draw Circle: Ctrl+C\n"
+                   "Draw Square: Ctrl+R";
 
     QMessageBox helpBox;
     helpBox.setWindowTitle("Help");

@@ -13,6 +13,8 @@
 #include <QObject>
 #include <QFileDialog>
 
+// Reviewed by - Tanner Rowlett
+
 class Model : public QObject
 {
     Q_OBJECT

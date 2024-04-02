@@ -42,9 +42,10 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
             int y = event->pos().y() / cellSize;
             emit gridClicked(QPoint(x, y));
         }
+        QWidget::update();
     }
 
-    QWidget::update();
+    //QWidget::update();
 
 }
 
