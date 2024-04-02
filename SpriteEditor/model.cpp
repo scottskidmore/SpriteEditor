@@ -187,7 +187,6 @@ void Model::loadPressed(QString fileName)
         {
             QJsonObject layerObj = layersArray[j].toObject();
             QJsonArray pixelsArray = layerObj.value("pixels").toArray();
-            qDebug() << pixelsArray.size();
             for(int k = 0; k < pixelsArray.size(); ++k) // loop through the pixels
             {
                 // get the x and y from the array index
