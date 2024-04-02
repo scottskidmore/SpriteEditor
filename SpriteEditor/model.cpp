@@ -87,7 +87,6 @@ void Model::savePressed(QString path)
     QJsonArray frames;
     int count = 0;
 
-    animationData["fps"] = a.fps;
     animationData["frameSize"] = a.frames[0]->imageSize;
     for (auto frame : a.frames) // loop through the frames
     {
@@ -221,7 +220,7 @@ void Model::loadPressed(QString fileName)
     }
     // update the frame display and set the saved fps
     getFrameImages();
-    emit loadFps(animation["fps"].toInt());
+    emit loadFps(1);
 }
 
 int Model::getFrameCount()
