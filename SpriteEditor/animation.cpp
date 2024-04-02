@@ -11,7 +11,7 @@ void Animation::addFrame(Frame *frame)
 
 }
 
-void Animation::deleteFrame(Frame *frame)
+void Animation::deleteFrame()
 {
     frames.pop_back();
 }

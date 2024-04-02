@@ -54,11 +54,6 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      this,
                      &MainWindow::saveDialog);
 
-    // QObject::connect(ui->actionLoad,
-    //                  &QAction::triggered,
-    //                  m,
-    //                  &model::loadPressed);
-
     QObject::connect(ui->actionLoad,
                      &QAction::triggered,
                      this,
@@ -310,7 +305,10 @@ void MainWindow::animate(){
         if(currentFrame>(int)frames.size()-1){
             currentFrame=0;
         }
-        ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame).scaled(ui->animation->width(),ui->animation->height())));
+        if (!ui->scaleAnimation->isChecked())
+            ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame).scaled(ui->animation->width(),ui->animation->height())));
+        else
+            ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame)));
         currentFrame++;
         timer.start(frameTime);
     }

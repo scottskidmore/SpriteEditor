@@ -27,7 +27,7 @@ public:
 
     /// \brief deleteFrame - removes a frame from the animation sequence
     /// \param frame pointer to the frame to be removed
-    void deleteFrame(Frame* frame);
+    void deleteFrame();
 
     /// \brief setfps - sets the frames per second for the animation
     /// \param fps number of frames per second

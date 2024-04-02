@@ -373,6 +373,19 @@
      <string/>
     </property>
    </widget>
+   <widget class="QCheckBox" name="scaleAnimation">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>260</y>
+      <width>77</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RealSize</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

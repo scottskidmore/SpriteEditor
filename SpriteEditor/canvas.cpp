@@ -34,9 +34,7 @@ void Canvas::paintEvent(QPaintEvent *event) {
         painter.drawLine(xy, 0, xy, 512);
         painter.drawLine(0, xy, 512, xy);
     }
-    qDebug() << "not printing layer, layersSize: " << layers.size();
     if (!layers.empty()) {
-        qDebug() << "printing layer, layersSize: " << layers.size();
         for(QImage layer : layers){
             painter.drawPixmap(0, 0,512,512, QPixmap::fromImage(layer));
         }
@@ -50,7 +48,6 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
             int x = event->pos().x() / cellSize;
             int y = event->pos().y() / cellSize;
             emit gridClicked(QPoint(x, y));
-            qDebug() << "Tracking Mouse move: " << x << " " << y;
         }
     }
 
@@ -60,7 +57,6 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-    qDebug() << "Mouse pressed: " << event->pos();
     int x = event->pos().x() / cellSize;
     int y = event->pos().y() / cellSize;
     emit gridClicked(QPoint(x, y));
@@ -71,7 +67,6 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
-    qDebug() << "Mouse released: " << event->pos();
     if (trackMouse) {
         int x = event->pos().x() / cellSize;
         int y = event->pos().y() / cellSize;

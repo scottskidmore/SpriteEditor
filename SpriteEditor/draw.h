@@ -14,9 +14,6 @@ public:
     /// \brief Draw constructor
     /// \param parent object defaulting to nullptr
     explicit Draw(QObject *parent = nullptr);
-    // int getLineWdith();
-    // void setLineWdith(int);
-    // QColor getColor();
     /// \brief setColor sets the draw color
     /// \param QColor color to set
     void setColor(QColor);
@@ -28,7 +25,6 @@ public:
     /// \param QPoint point to draw at
     /// \param int size of circle
     void drawCircle(QPoint, int);
-    //void drawTraingle(QPoint, int);
     /// \brief setImage sets this image to the provided image
     /// \param QImage& reference of image to set this
     void setImage(QImage&);
@@ -46,17 +42,14 @@ public:
 private:
     /// \brief color current color
     QColor color;
-    //int lineWidth;
     /// \brief image that is being drawn on
     QImage* image;
 
 public slots:
-    //void drawImage(QPoint);
     /// \brief drawPixel sets pixel at the provided point to the color
     /// \param QPoint point to draw at
     void drawPixel(QPoint);
-signals:
-    //void imageUpdated();
+
 };
 
 #endif // DRAW_H

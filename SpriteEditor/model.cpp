@@ -312,7 +312,6 @@ void Model::deleteFrame()
     }
     switchFrame(a.frames[a.frames.size() - 1]->frameID);
     getFrameImages();
-    qDebug() << a.frames.size();
 }
 
 void Model::updateAllFrameSizes(){
