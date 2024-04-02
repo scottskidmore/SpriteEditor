@@ -1,17 +1,12 @@
 #include "model.h"
-#include <QFileDialog>
-//Model::Model() {}
 
 Model::Model(QObject *parent)
     : QObject{parent}
 {
-    //currentTool = 'd';
-
     currentTool = Pen;
     f = new Frame();
     f->frameID = 0;
     a.addFrame(f);
-    //QObject::connect(f, &Frame::changeFrame, this, &model::switchFrame);
 }
 
 void Model::setDrawLayer()
@@ -23,7 +18,7 @@ void Model::setDrawLayer()
 void Model::getFrameImages()
 {
     std::vector<QImage> imageList;
-    for(int i = 0; i < (int)a.frames.size(); i++) {
+    for(int i = 0; i < (int)a.frames.size(); i++) {     // Loop through frames
         int size = a.frames[i]->imageSize;
         QImage image(size, size, QImage::Format_ARGB32);
         image.fill(Qt::transparent);
@@ -42,8 +37,10 @@ void Model::editImage(QPoint p)
     setDrawLayer();
     if (currentTool == Pen)
         pen.drawPixel(p);
+
     else if (currentTool == Eraser)
         pen.eraseTool(p);
+
     else if (currentTool == SprayCan)
         pen.sprayPaint(p, 6, 1);
 
@@ -57,12 +54,11 @@ void Model::handleDrawingShapes(QPoint startPoint, QPoint endPoint) {
     int height = abs(endPoint.y() - startPoint.y());
     int size = qMax(width, height);
 
-    if (currentTool == Circle){
+    if (currentTool == Circle)
         pen.drawCircle(startPoint, size);
-    }
-    else if (currentTool == Square){
+
+    else if (currentTool == Square)
         pen.drawSquare(startPoint, size);
-    }
 
     f->sendImages();
     getFrameImages();
@@ -125,6 +121,7 @@ void Model::savePressed(QString path)
         frameObj.insert("layers", layers);
         frames.append(frameObj);
     }
+
     // add the frames to the animation
     animationData.insert("frames", frames);
 
@@ -140,6 +137,7 @@ void Model::savePressed(QString path)
         out << dataTest;
         fileTest.close();
     }
+
     else { // if we cant save the file
         qDebug() << "Error saving file";
     }
@@ -153,6 +151,7 @@ void Model::loadPressed(QString fileName)
         qDebug() << "Failed to open file for reading";
         return;
     }
+
     QByteArray jsonData = file.readAll();
     file.close();
 
@@ -204,10 +203,10 @@ void Model::loadPressed(QString fileName)
                 newF->images[j].setPixelColor(point, color);
             }
         }
+
         if (i == 0) // if its the first frame
-        {
             a.frames[0] = newF;
-        }
+
         else // otherwise make a new frame
         {
             a.addFrame(newF);
@@ -215,6 +214,7 @@ void Model::loadPressed(QString fileName)
             emit connectFrameButton();
         }
     }
+
     // update the frame display and set the saved fps
     getFrameImages();
     emit loadFps(animation["fps"].toInt());
@@ -281,15 +281,15 @@ void Model::addFrame()
 {
     Frame* newF = new Frame();
     newF->frameID = (int)a.frames.size();
-    if (a.frames[0]->imageSize == 16){
-        newF->updateImageSizeTo16();
-    }
-    else if (a.frames[0]->imageSize == 32){
-        newF->updateImageSizeTo32();
-    }
-    else if (a.frames[0]->imageSize == 64){
-        newF->updateImageSizeTo64();
-    }
+    if (a.frames[0]->imageSize == 16)
+        newF->updateImageSize16();
+
+    else if (a.frames[0]->imageSize == 32)
+        newF->updateImageSize32();
+
+    else if (a.frames[0]->imageSize == 64)
+        newF->updateImageSize64();
+
     a.addFrame(newF);
     switchFrame(newF->frameID);
     emit connectFrameButton();
@@ -307,9 +307,8 @@ void Model::switchFrame(int id)
 void Model::deleteFrame()
 {
     if (a.frames.size() > 1)
-    {
         a.frames.pop_back();
-    }
+
     switchFrame(a.frames[a.frames.size() - 1]->frameID);
     getFrameImages();
 }
@@ -322,11 +321,13 @@ void Model::updateAllFrameSizes(){
             frame->updateImageSizeTo16();
         }
     }
+
     else if (senderObject->objectName() == "size32" || size == 32){
         for (auto frame : a.frames){
             frame->updateImageSizeTo32();
         }
     }
+
     else if (senderObject->objectName() == "size64" || size == 64){
         for (auto frame : a.frames){
             frame->updateImageSizeTo64();
@@ -337,15 +338,14 @@ void Model::updateAllFrameSizes(){
 
 void Model::updateFrameSizeInt(int size, Frame* frame)
 {
-    if (size == 16){
-        frame->updateImageSizeTo16();
-    }
-    else if (size == 32){
-        frame->updateImageSizeTo32();
-    }
-    else if (size == 64){
-        frame->updateImageSizeTo64();
-    }
+    if (size == 16)
+        frame->updateImageSize16();
+
+    else if (size == 32)
+        frame->updateImageSize32();
+
+    else if (size == 64)
+        frame->updateImageSize64();
 }
 
 void Model::updateFrameRate(int rate)

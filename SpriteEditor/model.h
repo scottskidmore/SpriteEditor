@@ -11,6 +11,7 @@
 #include <QBuffer>
 #include <QPushButton>
 #include <QObject>
+#include <QFileDialog>
 
 class Model : public QObject
 {
