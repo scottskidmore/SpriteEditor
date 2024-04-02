@@ -142,7 +142,8 @@ void Model::savePressed(QString path)
         out << data;
         file.close();
     }
-    else { // if we cant save the file
+    else // if we cant save the file
+    {
         qDebug() << "Error saving file";
     }
 }
@@ -331,21 +332,24 @@ void Model::updateAllFrameSizes()
     int size = 10;
     if (senderObject->objectName() == "size16" || size == 16)
     {
-        for (auto frame : a.frames){
+        for (auto frame : a.frames)
+        {
             frame->updateImageSizeTo16();
         }
     }
 
     else if (senderObject->objectName() == "size32" || size == 32)
     {
-        for (auto frame : a.frames){
+        for (auto frame : a.frames)
+        {
             frame->updateImageSizeTo32();
         }
     }
 
     else if (senderObject->objectName() == "size64" || size == 64)
     {
-        for (auto frame : a.frames){
+        for (auto frame : a.frames)
+        {
             frame->updateImageSizeTo64();
         }
     }
@@ -355,13 +359,17 @@ void Model::updateAllFrameSizes()
 void Model::updateFrameSizeInt(int size, Frame* frame)
 {
     if (size == 16)
+    {
         frame->updateImageSizeTo16();
-
+    }
     else if (size == 32)
+    {
         frame->updateImageSizeTo32();
-
+    }
     else if (size == 64)
+    {
         frame->updateImageSizeTo64();
+    }
 }
 
 void Model::updateFrameRate(int rate)

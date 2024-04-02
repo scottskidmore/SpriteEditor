@@ -21,14 +21,17 @@ void Canvas::paintEvent(QPaintEvent *event)
     pen.setWidth(1);
     painter.setPen(pen);
 
-    for (int i = 0; i < gridSize+1; i++) {
+    for (int i = 0; i < gridSize+1; i++)
+    {
         int xy = i * (512/gridSize);
         painter.drawLine(xy, 0, xy, 512);
         painter.drawLine(0, xy, 512, xy);
     }
 
-    if (!layers.empty()) {
-        for(QImage layer : layers){
+    if (!layers.empty())
+    {
+        for(QImage layer : layers)
+        {
             painter.drawPixmap(0, 0,512,512, QPixmap::fromImage(layer));
         }
     }
@@ -36,17 +39,16 @@ void Canvas::paintEvent(QPaintEvent *event)
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    if (trackMouse) {
-        if (event->pos().x() <= 512 && event->pos().y() <= 512 && event->pos().x() >= 0 && event->pos().y() >= 0) {
+    if (trackMouse)
+    {
+        if (event->pos().x() <= 512 && event->pos().y() <= 512 && event->pos().x() >= 0 && event->pos().y() >= 0)
+        {
             int x = event->pos().x() / cellSize;
             int y = event->pos().y() / cellSize;
             emit gridClicked(QPoint(x, y));
         }
         QWidget::update();
     }
-
-    //QWidget::update();
-
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
@@ -61,14 +63,14 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (trackMouse) {
+    if (trackMouse)
+    {
         int x = event->pos().x() / cellSize;
         int y = event->pos().y() / cellSize;
         endPoint = (QPoint(x, y));
         emit drawingAction(startPoint, endPoint);
         trackMouse = false;  // Stop tracking the mouse
     }
-
     update();
 }
 
@@ -104,7 +106,9 @@ void Canvas::loadPressed()
     dialog.setViewMode(QFileDialog::Detail);
     QStringList fileNames;
     if (dialog.exec())
+    {
         fileNames = dialog.selectedFiles();
+    }
 
     QWidget::update();
 }

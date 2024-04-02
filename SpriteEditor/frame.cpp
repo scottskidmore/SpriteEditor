@@ -33,7 +33,8 @@ void Frame::frameButtonPressed()
     emit changeFrame(this->frameID);
 }
 
-void Frame::updateImageSizeTo16(){
+void Frame::updateImageSizeTo16()
+{
     images.clear();
     QImage newImage(16, 16, QImage::Format_ARGB32);
     newImage.fill(Qt::transparent);
@@ -46,7 +47,8 @@ void Frame::updateImageSizeTo16(){
     emit updateImage(images);
 }
 
-void Frame::updateImageSizeTo32(){
+void Frame::updateImageSizeTo32()
+{
     images.clear();
     QImage newImage(32, 32, QImage::Format_ARGB32);
     newImage.fill(Qt::transparent);
@@ -59,7 +61,8 @@ void Frame::updateImageSizeTo32(){
     emit updateImage(images);
 }
 
-void Frame::updateImageSizeTo64(){
+void Frame::updateImageSizeTo64()
+{
     images.clear();
     QImage newImage(64, 64, QImage::Format_ARGB32);
     newImage.fill(Qt::transparent);
@@ -72,6 +75,7 @@ void Frame::updateImageSizeTo64(){
     emit updateImage(images);
 }
 
-void Frame::setCurrentLayer(int i){
+void Frame::setCurrentLayer(int i)
+{
     currentImage=i;
 }

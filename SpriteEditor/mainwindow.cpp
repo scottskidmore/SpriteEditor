@@ -223,10 +223,11 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
     this->m = m;
 }
 
-
-void MainWindow::chooseColor() {
+void MainWindow::chooseColor()
+{
     QColor color = QColorDialog::getColor(Qt::white, this, "Choose Color");
-    if (color.isValid()) {
+    if (color.isValid())
+    {
         ui->colorLabel->setStyleSheet("background-color: " + color.name() + ";");
         m->pen.setColor(color);
     }
@@ -245,7 +246,8 @@ void MainWindow::onAddFrame()
 void MainWindow::updateFrameDisplay(std::vector<QImage> images)
 {
     QObjectList children = ui->scrollAreaContents->children();
-    for (int i = 1; i <= (int)images.size() && i < children.size(); i++) {
+    for (int i = 1; i <= (int)images.size() && i < children.size(); i++)
+    {
         QPushButton *c = qobject_cast<QPushButton*>(children[i]);
         QPixmap m;
         m.convertFromImage(images[i-1]);
@@ -259,7 +261,8 @@ void MainWindow::connectButtonFrame()
 {
     QObjectList children = ui->scrollAreaContents->children();
     int index = children.size() - 1;
-    if (index < m->getFrameCount()) {
+    if (index < m->getFrameCount())
+    {
         QPushButton *button = new QPushButton(this);
         button->setMaximumSize(64, 64);
         button->setMinimumSize(64, 64);
@@ -284,7 +287,8 @@ void MainWindow::onRemoveFrame()
 {
     QObjectList children = ui->scrollAreaContents->children();
     int index = children.size() - 1;
-    if (index > 1) {
+    if (index > 1)
+    {
         QPushButton *c = qobject_cast<QPushButton*>(children[index]);
         ui->scrollFrameBox->removeWidget(c);
         delete c;
@@ -301,15 +305,22 @@ void MainWindow::storeFrames(std::vector<QImage> images){
     frames=images;
 }
 
-void MainWindow::animate(){
-    if((int)frames.size() != 0){
-        if(currentFrame > (int)frames.size()-1){
+void MainWindow::animate()
+{
+    if((int)frames.size() != 0)
+    {
+        if(currentFrame > (int)frames.size()-1)
+        {
             currentFrame=0;
         }
         if (!ui->scaleAnimation->isChecked())
+        {
             ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame).scaled(ui->animation->width(),ui->animation->height())));
+        }
         else
+        {
             ui->animation->setPixmap(QPixmap::fromImage(frames.at(currentFrame)));
+        }
         currentFrame++;
         timer.start(frameTime);
     }
@@ -319,7 +330,8 @@ void MainWindow::onNewButtonPressed()
 {
     QObjectList children = ui->scrollAreaContents->children();
     int index = children.size() - 1;
-    while (index > 1) {
+    while (index > 1)
+    {
         QPushButton *c = qobject_cast<QPushButton*>(children[index]);
         ui->scrollFrameBox->removeWidget(c);
         delete c;
@@ -345,11 +357,15 @@ void MainWindow::loadPressed()
 void MainWindow::updateFps(int i)
 {
     if (i > 70 || i <= 0)
+    {
         i = 1;
+    }
 
     frameTime= (1.0 / (double)i) * 1000;
-    if(!timer.isActive())
+    if (!timer.isActive())
+    {
         animate();
+    }
 }
 
 void MainWindow::helpClicked()
@@ -386,12 +402,15 @@ void MainWindow::saveDialog()
 {
     QString filePath = QFileDialog::getSaveFileName(this, "Save File", QDir::homePath(), "Sprite Animations (*.ssp)");
     if (!filePath.isEmpty())
-        m->savePressed(filePath);   
+    {
+        m->savePressed(filePath);
+    }
 }
 
 void MainWindow::changeToLoadSize(int size)
 {
-    switch (size) {
+    switch (size)
+    {
     case 16:
         ui->canvas->updateGridSizeTo16();
         break;
