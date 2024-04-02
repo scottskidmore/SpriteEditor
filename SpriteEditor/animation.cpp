@@ -1,14 +1,12 @@
 #include "animation.h"
-
-Animation::Animation(QWidget *parent)
-    : QLabel{parent}
+/// Reviewed by Patrick Schlegel
+Animation::Animation(QWidget *parent) : QLabel{parent}
 {
-
 }
+
 void Animation::addFrame(Frame *frame)
 {
     frames.push_back(frame);
-
 }
 
 void Animation::deleteFrame()
