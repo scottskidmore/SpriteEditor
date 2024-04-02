@@ -344,7 +344,7 @@ void MainWindow::loadPressed()
 
 void MainWindow::updateFps(int i)
 {
-    if (i > 70 || i < 0)
+    if (i > 70 || i <= 0)
         i = 1;
 
     frameTime= (1.0 / (double)i) * 1000;

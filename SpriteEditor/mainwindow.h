@@ -53,7 +53,7 @@ public slots:
     ///
     void updateFrameDisplay(std::vector<QImage> images);
     ///
-    /// \brief storeFrames
+    /// \brief storeFrames - stores the images to the frames field
     /// \param images
     ///
     void storeFrames(std::vector<QImage> images);
@@ -96,7 +96,7 @@ public slots:
     ///
     void changeUsingLayerText(QString text);
     ///
-    /// \brief saveDialog
+    /// \brief saveDialog - opens a save dialog when the save button is pressed.
     ///
     void saveDialog();
     ///
