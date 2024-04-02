@@ -282,13 +282,13 @@ void Model::addFrame()
     Frame* newF = new Frame();
     newF->frameID = (int)a.frames.size();
     if (a.frames[0]->imageSize == 16){
-        newF->updateImageSize16();
+        newF->updateImageSizeTo16();
     }
     else if (a.frames[0]->imageSize == 32){
-        newF->updateImageSize32();
+        newF->updateImageSizeTo32();
     }
     else if (a.frames[0]->imageSize == 64){
-        newF->updateImageSize64();
+        newF->updateImageSizeTo64();
     }
     a.addFrame(newF);
     switchFrame(newF->frameID);
@@ -319,17 +319,17 @@ void Model::updateAllFrameSizes(){
     int size = 10;
     if (senderObject->objectName() == "size16" || size == 16){
         for (auto frame : a.frames){
-            frame->updateImageSize16();
+            frame->updateImageSizeTo16();
         }
     }
     else if (senderObject->objectName() == "size32" || size == 32){
         for (auto frame : a.frames){
-            frame->updateImageSize32();
+            frame->updateImageSizeTo32();
         }
     }
     else if (senderObject->objectName() == "size64" || size == 64){
         for (auto frame : a.frames){
-            frame->updateImageSize64();
+            frame->updateImageSizeTo64();
         }
     }
     getFrameImages();
@@ -338,13 +338,13 @@ void Model::updateAllFrameSizes(){
 void Model::updateFrameSizeInt(int size, Frame* frame)
 {
     if (size == 16){
-        frame->updateImageSize16();
+        frame->updateImageSizeTo16();
     }
     else if (size == 32){
-        frame->updateImageSize32();
+        frame->updateImageSizeTo32();
     }
     else if (size == 64){
-        frame->updateImageSize64();
+        frame->updateImageSizeTo64();
     }
 }
 

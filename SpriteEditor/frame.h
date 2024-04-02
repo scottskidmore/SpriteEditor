@@ -48,17 +48,17 @@ public slots:
     ///
     void frameButtonPressed();
     ///
-    /// \brief updateImageSize16 clears images and sets new image sizes to 16x16
+    /// \brief updateImageSizeTo16 clears images and sets new image sizes to 16x16
     ///
-    void updateImageSize16();
+    void updateImageSizeTo16();
     ///
-    /// \brief updateImageSize32 clears images and sets new image sizes to 32x32
+    /// \brief updateImageSizeTo32 clears images and sets new image sizes to 32x32
     ///
-    void updateImageSize32();
+    void updateImageSizeTo32();
     ///
-    /// \brief updateImageSize64 clears images and sets new image sizes to 64x64
+    /// \brief updateImageSizeTo64 clears images and sets new image sizes to 64x64
     ///
-    void updateImageSize64();
+    void updateImageSizeTo64();
 
 };
 
