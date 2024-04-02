@@ -1,4 +1,5 @@
 #include "draw.h"
+///Reviewed for code style by Paolo Diotaiuti
 
 Draw::Draw(QObject *parent)
     : QObject{parent}
@@ -6,52 +7,37 @@ Draw::Draw(QObject *parent)
     color = Qt::black;
 }
 
-// int Draw::getLineWdith()
-// {
-
-// }
-
-// void Draw::setLineWdith(int)
-// {
-
-// }
-
-// QColor Draw::getColor()
-// {
-
-// }
-
-void Draw::setColor(QColor c)
+void Draw::setColor(QColor newColor)
 {
-    color = c;
+    color = newColor;
 }
 
-void Draw::drawSquare(QPoint p , int width)
+void Draw::drawSquare(QPoint point , int width)
 {
     QPainter painter(this->image);
     painter.setPen(color);
-    painter.drawRect(p.x(), p.y(), width, width);
+    painter.drawRect(point.x(), point.y(), width, width);
 }
 
-void Draw::drawCircle(QPoint p, int diameter)
+void Draw::drawCircle(QPoint point, int diameter)
 {
     QPainter painter(this->image);
     painter.setPen(color);
-    painter.drawEllipse(p.x(), p.y(), diameter, diameter);
+    painter.drawEllipse(point.x(), point.y(), diameter, diameter);
 }
 
 void Draw::sprayPaint(QPoint center, int radius, int density)
 {
     QPainter painter(this->image);
     painter.setPen(color);
-
     int pointsToDraw = radius * density;
-
-    for (int i = 0; i < pointsToDraw; ++i) {
+    //finds random pixels within the radius to be drawn
+    for (int i = 0; i < pointsToDraw; ++i)
+    {
         int dx = QRandomGenerator::global()->bounded(-radius, radius);
         int dy = QRandomGenerator::global()->bounded(-radius, radius);
-
-        if (dx * dx + dy * dy <= radius * radius) {
+        if (dx * dx + dy * dy <= radius * radius)
+        {
             painter.drawPoint(center.x() + dx, center.y() + dy);
         }
     }
@@ -76,8 +62,3 @@ QImage Draw::getImage()
 {
     return *image;
 }
-
-// void Draw::drawImage(QPoint point)
-// {
-
-// }
