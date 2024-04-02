@@ -16,15 +16,22 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+/// \brief The MainWindow class - handles the view of the MV structure
+/// Inherits from QMainWindow
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+
+    /// \brief MainWindow constructor
+    /// \param parent QWidget defaulted to nullptr
     MainWindow(Model*, QWidget *parent = nullptr);
+    /// Destructor
     ~MainWindow();
 
 private:
+
     QTimer timer;
     Ui::MainWindow *ui;
     Model* m;

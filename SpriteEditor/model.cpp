@@ -1,6 +1,6 @@
 #include "model.h"
 
-/// Reviewed by Adam Bently and Patrick Schlegel
+/// Reviewed by Adam Bentley and Patrick Schlegel
 Model::Model(QObject *parent)
     : QObject{parent}
 {

@@ -13,7 +13,7 @@
 #include <QObject>
 #include <QFileDialog>
 
-/// Reviewed by Adam Bently and Patrick Schlegel
+/// Reviewed by Adam Bentley and Patrick Schlegel
 /// \brief Model - a class for managing the model part of the MV structure
 /// Inherits from QObject
 class Model : public QObject

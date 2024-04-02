@@ -12,6 +12,7 @@ class Draw : public QObject
 {
     Q_OBJECT
 public:
+
     /// \brief Draw constructor
     /// \param parent object defaulting to nullptr
     explicit Draw(QObject *parent = nullptr);
@@ -48,6 +49,7 @@ public:
     void sprayPaint(QPoint center, int radius, int density);
 
 private:
+
     /// \brief color current color
     QColor color;
 
@@ -55,6 +57,7 @@ private:
     QImage* image;
 
 public slots:
+
     /// \brief drawPixel sets pixel at the provided point to the color
     /// \param QPoint point to draw at
     void drawPixel(QPoint point);

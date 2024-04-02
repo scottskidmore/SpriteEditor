@@ -5,20 +5,24 @@
 #include <vector>
 //Drew Humphrey
 
+/// \brief The Frame class - handles the individual frames of the animation
+/// Inherits from QObject
 class Frame : public QObject
 {
     Q_OBJECT
 public:
-    explicit Frame(QObject *parent = nullptr);
-
-    /// \brief drawPixel draws pixel at location stored by QPoint on the current image.
-    /// \param QPoint where to draw the pixel
-    void drawPixel(QPoint);
 
     QImage& getCurrentLayer();
     int frameID;
     std::vector<QImage> images;
 
+    /// \brief Frame constructor
+    /// \param parent QObject defaulted to nullptr
+    explicit Frame(QObject *parent = nullptr);
+
+    /// \brief drawPixel draws pixel at location stored by QPoint on the current image.
+    /// \param QPoint where to draw the pixel
+    void drawPixel(QPoint);
 
     /// \brief setCurrentLayer sets current layer to layer at specified index of layer collection.
     /// \param int i the index of the layer to switch to.
