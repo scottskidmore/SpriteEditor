@@ -1,11 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include "model.h"
+#include "ui_mainwindow.h"
+#include "canvas.h"
 #include "qtimer.h"
 #include <QColorDialog>
 #include <QMessageBox>
+#include <QFileDialog>
+//Drew Humphrey
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,7 +24,6 @@ public:
     MainWindow(Model*, QWidget *parent = nullptr);
     ~MainWindow();
 
-
 private:
     QTimer timer;
     Ui::MainWindow *ui;
@@ -29,6 +31,7 @@ private:
     int currentFrame=0;
     std::vector<QImage> frames;
     int frameTime=1000;
+
     ///
     /// \brief chooseColor displays a popup of color choices then sets pen color to chosen color.
     ///
@@ -102,4 +105,5 @@ public slots:
     ///
     void changeToLoadSize(int size);
 };
+
 #endif // MAINWINDOW_H

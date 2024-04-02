@@ -1,7 +1,5 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "canvas.h"
-#include <QFileDialog>
+//Drew Humphrey
 
 MainWindow::MainWindow(Model *m, QWidget *parent)
     : QMainWindow(parent)
@@ -11,19 +9,19 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
     ui->canvas->setGridSize(32);
     timer.start(5);
     QObject::connect(ui->canvas,
-            &Canvas::gridClicked,
-            m,
-            &Model::editImage);
+                     &Canvas::gridClicked,
+                     m,
+                     &Model::editImage);
 
     QObject::connect(m->f,
-            &Frame::updateImage,
-            ui->canvas,
-            &Canvas::updateCanvas);
+                     &Frame::updateImage,
+                     ui->canvas,
+                     &Canvas::updateCanvas);
 
     QObject::connect(ui->ActionDraw,
-            &QAction::triggered,
-            m,
-            &Model::drawPressed);
+                     &QAction::triggered,
+                     m,
+                     &Model::drawPressed);
 
     QObject::connect(ui->actionSquare,
                      &QAction::triggered,
@@ -34,6 +32,7 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      &QAction::triggered,
                      m,
                      &Model::circlePressed);
+
     QObject::connect(ui->actionSpray_Paint,
                      &QAction::triggered,
                      m,
@@ -45,9 +44,9 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      &Model::handleDrawingShapes);
 
     QObject::connect(ui->actionErase,
-            &QAction::triggered,
-            m,
-            &Model::erasePressed);
+                     &QAction::triggered,
+                     m,
+                     &Model::erasePressed);
 
     QObject::connect(ui->actionSave,
                      &QAction::triggered,
@@ -99,12 +98,11 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      m,
                      &Model::layer5);
 
-
-
     QObject::connect(ui->addFrameButton,
                      &QPushButton::clicked,
                      this,
                      &MainWindow::onAddFrame);
+
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
                      ui->canvas,
@@ -135,7 +133,6 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      m,
                      &Model::updateAllFrameSizes);
 
-
     QObject::connect(ui->frame0,
                      &QPushButton::clicked,
                      m->f,
@@ -165,6 +162,7 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      &QPushButton::clicked,
                      this,
                      &MainWindow::onRemoveFrame);
+
     QObject::connect(this,
                      &MainWindow::frameButtonRemoved,
                      m,
@@ -174,6 +172,7 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      &QSlider::sliderMoved,
                      this,
                      &MainWindow::updateFps);
+
     QObject::connect(m,
                      &Model::loadFps,
                      this,
@@ -183,10 +182,12 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      &QTimer::timeout,
                      this,
                      &MainWindow::animate);
+
     QObject::connect(ui->actionNew,
                      &QAction::triggered,
                      this,
                      &MainWindow::onNewButtonPressed);
+
     QObject::connect(m,
                      &Model::clearAnimation,
                      this,
@@ -216,7 +217,6 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
                      &Model::updateLoadImageSize,
                      this,
                      &MainWindow::changeToLoadSize);
-
 
     m->setDrawLayer();
     this->m = m;
@@ -265,6 +265,7 @@ void MainWindow::connectButtonFrame()
         button->setGeometry(75, 10, 64, 64);
         ui->scrollFrameBox->addWidget(button);
     }
+
     QObject::connect(qobject_cast<QPushButton*>(ui->scrollAreaContents->children().last()), &QPushButton::clicked, m->a.frames.back(), &Frame::frameButtonPressed);
     QObject::connect(m->a.frames.back(), &Frame::changeFrame, m, &Model::switchFrame);
 }
@@ -291,6 +292,7 @@ void MainWindow::onRemoveFrame()
         ui->scrollFrameBox->update();
         emit frameButtonRemoved();
     }
+
     ui->canvas->update();
 }
 
@@ -327,9 +329,9 @@ void MainWindow::onNewButtonPressed()
         ui->scrollFrameBox->update();
         index--;
     }
+
     emit createNewSprite();
     ui->canvas->updateGridSizeTo32();
-
 }
 
 void MainWindow::loadPressed()
@@ -339,7 +341,6 @@ void MainWindow::loadPressed()
                                                     tr("Sprite Animations (*.ssp)"));
     m->loadPressed(fileName);
     QWidget::update();
-
 }
 
 void MainWindow::updateFps(int i)
@@ -379,8 +380,7 @@ void MainWindow::saveDialog()
 {
     QString filePath = QFileDialog::getSaveFileName(this, "Save File", QDir::homePath(), "Sprite Animations (*.ssp)");
     if (!filePath.isEmpty())
-        m->savePressed(filePath);
-
+        m->savePressed(filePath);   
 }
 
 void MainWindow::changeToLoadSize(int size)
@@ -397,7 +397,6 @@ void MainWindow::changeToLoadSize(int size)
         break;
     }
 }
-
 
 MainWindow::~MainWindow()
 {
