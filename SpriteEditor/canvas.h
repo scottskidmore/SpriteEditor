@@ -6,7 +6,10 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <vector>
+#include <QImageWriter>
+#include <QFileDialog>
 
+/// Reviewed by Scott Skidmore
 /// \brief Canvas - a class for displaying sprites on the UI
 /// Inherits from QLabel to display the sprite
 class Canvas : public QLabel
@@ -62,11 +65,11 @@ public slots:
     /// \brief updateCanvas updates the UI canvas based on the sent vector of QImages
     void updateCanvas(std::vector<QImage>);
     /// \brief updateGridSize16 updates the UI grid size to 16x16
-    void updateGridSize16();
+    void updateGridSizeTo16();
     /// \brief updateGridSize32 updates the UI grid size to 32x32
-    void updateGridSize32();
+    void updateGridSizeTo32();
     /// \brief updateGridSize64 updates the UI grid size to 64x64
-    void updateGridSize64();
+    void updateGridSizeTo64();
     /// \brief loadPressed displays the dialog box for file loading
     void loadPressed();
 };

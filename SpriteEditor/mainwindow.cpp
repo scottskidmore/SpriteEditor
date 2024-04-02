@@ -108,17 +108,17 @@ MainWindow::MainWindow(Model *m, QWidget *parent)
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
                      ui->canvas,
-                     &Canvas::updateGridSize16);
+                     &Canvas::updateGridSizeTo16);
 
     QObject::connect(ui->size32,
                      &QPushButton::clicked,
                      ui->canvas,
-                     &Canvas::updateGridSize32);
+                     &Canvas::updateGridSizeTo32);
 
     QObject::connect(ui->size64,
                      &QPushButton::clicked,
                      ui->canvas,
-                     &Canvas::updateGridSize64);
+                     &Canvas::updateGridSizeTo64);
 
     QObject::connect(ui->size16,
                      &QPushButton::clicked,
@@ -328,7 +328,7 @@ void MainWindow::onNewButtonPressed()
         index--;
     }
     emit createNewSprite();
-    ui->canvas->updateGridSize32();
+    ui->canvas->updateGridSizeTo32();
 
 }
 
@@ -387,13 +387,13 @@ void MainWindow::changeToLoadSize(int size)
 {
     switch (size) {
     case 16:
-        ui->canvas->updateGridSize16();
+        ui->canvas->updateGridSizeTo16();
         break;
     case 32:
-        ui->canvas->updateGridSize32();
+        ui->canvas->updateGridSizeTo32();
         break;
     case 64:
-        ui->canvas->updateGridSize64();
+        ui->canvas->updateGridSizeTo64();
         break;
     }
 }

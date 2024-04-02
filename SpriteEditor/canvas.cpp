@@ -1,10 +1,7 @@
 #include "canvas.h"
-#include <QDebug>
-#include <QImageWriter>
-#include <QFileDialog>
 
-Canvas::Canvas(QWidget *parent)
-    : QLabel{parent}
+/// Reviewed by Scott Skidmore
+Canvas::Canvas(QWidget *parent) : QLabel{parent}
 {
     setMouseTracking(true);
     trackMouse = false;
@@ -13,17 +10,12 @@ Canvas::Canvas(QWidget *parent)
 void Canvas::setGridSize(int size)
 {
     this->gridSize = size;
-    cellSize = 512/gridSize;
+    cellSize = 512 / gridSize;
 }
 
-void Canvas::drawGrid()
+
+void Canvas::paintEvent(QPaintEvent *event)
 {
-    for (int i = 0; i < gridSize; i++) {
-
-    }
-}
-
-void Canvas::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     QPen pen(Qt::lightGray);
     pen.setWidth(1);
@@ -34,6 +26,7 @@ void Canvas::paintEvent(QPaintEvent *event) {
         painter.drawLine(xy, 0, xy, 512);
         painter.drawLine(0, xy, 512, xy);
     }
+
     if (!layers.empty()) {
         for(QImage layer : layers){
             painter.drawPixmap(0, 0,512,512, QPixmap::fromImage(layer));
@@ -74,6 +67,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
         emit drawingAction(startPoint, endPoint);
         trackMouse = false;  // Stop tracking the mouse
     }
+
     update();
 }
 
@@ -82,19 +76,21 @@ void Canvas::updateCanvas(std::vector<QImage> newLayers)
     std::swap(layers, newLayers);
 }
 
-void Canvas::updateGridSize16(){
+void Canvas::updateGridSizeTo16(){
 
     setGridSize(16);
     QWidget::update();
 }
 
-void Canvas::updateGridSize32(){
+void Canvas::updateGridSizeTo32()
+{
 
     setGridSize(32);
     QWidget::update();
 }
 
-void Canvas::updateGridSize64(){
+void Canvas::updateGridSizeTo64()
+{
 
     setGridSize(64);
     QWidget::update();
@@ -102,12 +98,12 @@ void Canvas::updateGridSize64(){
 
 void Canvas::loadPressed()
 {
-    qDebug() << "Load pressed!!!!!!";
     QFileDialog dialog(this);
     dialog.setFileMode(QFileDialog::AnyFile);
     dialog.setViewMode(QFileDialog::Detail);
     QStringList fileNames;
     if (dialog.exec())
         fileNames = dialog.selectedFiles();
+
     QWidget::update();
 }
