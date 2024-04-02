@@ -1,9 +1,9 @@
 #ifndef FRAME_H
 #define FRAME_H
-
 #include <QImage>
 #include "qobject.h"
 #include <vector>
+//Drew Humphrey
 
 class Frame : public QObject
 {
@@ -59,7 +59,6 @@ public slots:
     /// \brief updateImageSizeTo64 clears images and sets new image sizes to 64x64
     ///
     void updateImageSizeTo64();
-
 };
 
 #endif // FRAME_H

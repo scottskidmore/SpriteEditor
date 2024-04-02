@@ -1,5 +1,5 @@
 #include "frame.h"
-
+//Drew Humphrey
 Frame::Frame(QObject *parent)
 {
     QImage newImage(32, 32, QImage::Format_ARGB32);

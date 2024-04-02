@@ -14,6 +14,9 @@ public:
     /// \brief frames - a vector storing pointers to the frames of the animation
     std::vector<Frame*> frames;
 
+    /// \brief fps - frames per second for the animation
+    int fps;
+
     /// \brief Animation constructor
     /// \param parent the parent widget, default is nullptr
     explicit Animation(QWidget *parent = nullptr);
@@ -37,8 +40,6 @@ public:
     QStringList file;
 
 private:
-    /// \brief fps - frames per second for the animation
-    int fps;
 
     /// \brief currentFrame - index of the current frame in the animation sequence
     int currentFrame = 0;
