@@ -11,6 +11,7 @@ class Animation : public QLabel
 {
     Q_OBJECT
 public:
+
     /// \brief frames - a vector storing pointers to the frames of the animation
     std::vector<Frame*> frames;
 
